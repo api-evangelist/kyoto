@@ -1,0 +1,44 @@
+---
+name: Kyoto University
+description: Kyoto University public developer/API footprint review for APIs.json cataloging.
+url: https://raw.githubusercontent.com/api-evangelist/kyoto/refs/heads/main/review.yml
+created: '2026-06-03'
+modified: '2026-06-03'
+reviews:
+  - date: '2026-06-03'
+    rating: 2
+    summary: >-
+      Kyoto University has no centralized developer portal. Verified live: the
+      KURENAI DSpace repository OAI-PMH endpoint responds to Identify
+      (repositoryName "Kyoto University Research Information Repository",
+      protocolVersion 2.0), the kyoto-u GitHub organization exists with ~20
+      open-source repos, and the IIMC Shibboleth/SAML integrated authentication
+      system is publicly documented. The legacy /dspace-oai and /oai OAI paths
+      return 200 but the canonical base is /server/oai/request. Student/course
+      information systems are gated behind campus accounts; no public REST API
+      docs were found. No fabrication: only endpoints probed live are recorded.
+    endpoints:
+      - url: https://repository.kulib.kyoto-u.ac.jp/server/oai/request?verb=Identify
+        status: 200
+        note: Canonical OAI-PMH 2.0 endpoint; Identify confirms KURENAI repository.
+      - url: https://repository.kulib.kyoto-u.ac.jp/dspace-oai/request?verb=Identify
+        status: 200
+        note: Legacy OAI path, redirects/resolves to current DSpace.
+      - url: https://repository.kulib.kyoto-u.ac.jp/
+        status: 200
+        note: KURENAI repository home / human docs.
+      - url: https://github.com/kyoto-u
+        status: 200
+        note: Kyoto University Open Source Project GitHub org, ~20 repos.
+      - url: https://www.iimc.kyoto-u.ac.jp/en/services/account/auth-system
+        status: 200
+        note: IIMC integrated authentication (Shibboleth/SAML) documentation.
+      - url: https://authidp1.iimc.kyoto-u.ac.jp/
+        status: 200
+        note: Shibboleth IdP login surface (gated, not a public API).
+      - url: https://www.kyoto-u.ac.jp/en
+        status: 200
+        note: Official university website (English).
+      - url: https://www.linkedin.com/school/kyoto-university/
+        status: 999
+        note: LinkedIn school page; 999 is LinkedIn bot-blocking, page exists.

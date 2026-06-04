@@ -1,0 +1,81 @@
+---
+aid: kyoto
+name: Kyoto University
+description: >-
+  Kyoto University is a national research university in Kyoto, Japan, ranked #37
+  in the QS World University Rankings 2025. Its public, machine-readable
+  developer footprint is centered on scholarly and open-source infrastructure
+  rather than a centralized developer portal. Confirmed public surfaces include
+  the KURENAI research information repository (DSpace) with a live OAI-PMH
+  metadata endpoint, the kyoto-u "Kyoto University Open Source Project" GitHub
+  organization, and a Shibboleth/SAML integrated authentication system operated
+  by the Institute for Information Management and Communication (IIMC). Student
+  information, course, and timetable systems are gated behind campus accounts
+  and are not publicly documented APIs.
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/kyoto/refs/heads/main/apis.yml
+tags:
+  - Education
+  - Higher Education
+  - University
+  - Research
+  - Open Data
+  - Scholarly
+  - Repository
+  - Japan
+created: '2026-06-03'
+modified: '2026-06-03'
+specificationVersion: '0.19'
+apis:
+  - aid: kyoto:kurenai-oai
+    name: KURENAI OAI-PMH Metadata API
+    description: >-
+      The Kyoto University Research Information Repository (KURENAI), built on
+      DSpace, exposes an OAI-PMH 2.0 metadata harvesting endpoint for its
+      bulletins, dissertations, and academic journal articles. Verified live via
+      the Identify verb (repositoryName "Kyoto University Research Information
+      Repository", admin email repository@mail2.adm.kyoto-u.ac.jp).
+    humanURL: https://repository.kulib.kyoto-u.ac.jp/
+    baseURL: https://repository.kulib.kyoto-u.ac.jp/server/oai/request
+    tags: [ Repository, OAI-PMH, Metadata, Scholarly, Open Access, Research ]
+    properties:
+      - type: Documentation
+        url: https://repository.kulib.kyoto-u.ac.jp/
+  - aid: kyoto:sso
+    name: Kyoto University Integrated Authentication (Shibboleth/SAML)
+    description: >-
+      The Institute for Information Management and Communication (IIMC) operates
+      a Shibboleth-based SAML identity provider for university-wide accounts
+      (SPS-ID / ECS-ID) with multi-factor authentication. Federation/SP
+      connections require committee approval; this is institutional SSO
+      infrastructure, not a public self-service API.
+    humanURL: https://www.iimc.kyoto-u.ac.jp/en/services/account/auth-system
+    tags: [ Authentication, SSO, Shibboleth, SAML, Identity ]
+    properties:
+      - type: Documentation
+        url: https://www.iimc.kyoto-u.ac.jp/en/services/account/auth-system
+common:
+  - type: Website
+    url: https://www.kyoto-u.ac.jp/en
+  - type: GitHub
+    url: https://github.com/kyoto-u
+  - type: LinkedIn
+    url: https://www.linkedin.com/school/kyoto-university/
+  - type: Twitter
+    url: https://twitter.com/Kyoto_Univ_PR
+  - type: Authentication
+    url: https://www.iimc.kyoto-u.ac.jp/en/services/account/auth-system
+  - type: Plans
+    url: plans/kyoto-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/kyoto-rate-limits.yml
+  - type: FinOps
+    url: finops/kyoto-finops.yml
+  - type: Review
+    url: review.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
