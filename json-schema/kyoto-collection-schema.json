@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://repository.kulib.kyoto-u.ac.jp/schemas/collection.json",
+  "title": "KURENAI Collection",
+  "description": "A DSpace collection in the Kyoto University Research Information Repository (KURENAI), as returned by /server/api/core/collections.",
+  "type": "object",
+  "required": ["uuid", "name", "handle", "type"],
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "uuid": { "type": "string", "format": "uuid" },
+    "name": { "type": "string" },
+    "handle": { "type": "string", "examples": ["2433/126120"] },
+    "archivedItemsCount": { "type": "integer", "minimum": 0 },
+    "type": { "type": "string", "const": "collection" }
+  }
+}

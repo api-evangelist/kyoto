@@ -1,0 +1,16 @@
+{
+  "request": {
+    "url": "https://repository.kulib.kyoto-u.ac.jp/server/oai/request?verb=Identify"
+  },
+  "response_xml": "<OAI-PMH xmlns=\"http://www.openarchives.org/OAI/2.0/\"><responseDate>2026-06-04T02:47:43Z</responseDate><request verb=\"Identify\">https://repository.kulib.kyoto-u.ac.jp/server/oai/request</request><Identify><repositoryName>Kyoto University Research Information Repository</repositoryName><baseURL>https://repository.kulib.kyoto-u.ac.jp/server/oai/request</baseURL><protocolVersion>2.0</protocolVersion><adminEmail>repository@mail2.adm.kyoto-u.ac.jp</adminEmail><earliestDatestamp>2006-06-05T02:18:13Z</earliestDatestamp><deletedRecord>transient</deletedRecord><granularity>YYYY-MM-DDThh:mm:ssZ</granularity></Identify></OAI-PMH>",
+  "parsed": {
+    "repositoryName": "Kyoto University Research Information Repository",
+    "baseURL": "https://repository.kulib.kyoto-u.ac.jp/server/oai/request",
+    "protocolVersion": "2.0",
+    "adminEmail": "repository@mail2.adm.kyoto-u.ac.jp",
+    "earliestDatestamp": "2006-06-05T02:18:13Z",
+    "deletedRecord": "transient",
+    "granularity": "YYYY-MM-DDThh:mm:ssZ",
+    "metadataFormats": ["oai_dc", "jpcoar_2.0", "didl"]
+  }
+}

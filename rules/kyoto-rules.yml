@@ -1,0 +1,41 @@
+extends: [[spectral:oas, off]]
+formats:
+  - oas3
+documentationUrl: https://repository.kulib.kyoto-u.ac.jp/
+rules:
+  kyoto-info-contact:
+    description: API info must declare a contact (KURENAI repository administration).
+    given: $.info
+    severity: warn
+    then:
+      field: contact
+      function: truthy
+  kyoto-server-is-kurenai:
+    description: Servers must point at the KURENAI repository host.
+    given: $.servers[*].url
+    severity: error
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://repository\\.kulib\\.kyoto-u\\.ac\\.jp"
+  kyoto-operation-ids:
+    description: Every operation should carry an operationId.
+    given: $.paths[*][get,post,put,delete,patch]
+    severity: warn
+    then:
+      field: operationId
+      function: truthy
+  kyoto-hal-links:
+    description: HAL response schemas should expose a _links object.
+    given: $.components.schemas[?(@property == 'Community' || @property == 'RestRoot')].properties
+    severity: info
+    then:
+      field: _links
+      function: truthy
+  kyoto-oai-verb-enum:
+    description: The OAI-PMH endpoint must enumerate the standard verbs.
+    given: $.paths['/server/oai/request'].get.parameters[?(@.name == 'verb')].schema
+    severity: warn
+    then:
+      field: enum
+      function: truthy

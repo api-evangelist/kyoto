@@ -1,0 +1,56 @@
+vocabulary:
+  name: KURENAI Repository Vocabulary
+  description: >-
+    Controlled terms observed in the machine-readable surfaces of the Kyoto
+    University Research Information Repository (KURENAI), a DSpace 7.6 instance
+    exposing a HAL+JSON REST API and an OAI-PMH 2.0 endpoint.
+  version: '1.0.0'
+  terms:
+    - term: Community
+      definition: >-
+        A top-level or nested DSpace container that groups collections;
+        identified by a UUID and a Handle (2433/NNNNN).
+      tags: [dspace, container, rest]
+    - term: Collection
+      definition: >-
+        A DSpace container of archived items within a community; identified by a
+        UUID and a Handle.
+      tags: [dspace, container, rest]
+    - term: Item
+      definition: >-
+        An individual archived record (article, dissertation, bulletin) in the
+        repository; item-level REST access requires authentication.
+      tags: [dspace, record, rest, authenticated]
+    - term: Handle
+      definition: >-
+        A persistent identifier of the form 2433/NNNNN resolvable via
+        http://hdl.handle.net/, used across communities, collections, and items.
+      tags: [identifier, handle, persistent]
+    - term: MetadataValue
+      definition: >-
+        A single Dublin Core metadata entry with value, language, authority,
+        confidence, and place, keyed by a qualified DC field name.
+      tags: [metadata, dublin-core]
+    - term: OAI-PMH
+      definition: >-
+        Open Archives Initiative Protocol for Metadata Harvesting 2.0; the
+        verb-driven harvesting interface at /server/oai/request.
+      tags: [oai-pmh, harvesting, metadata]
+    - term: metadataPrefix
+      definition: >-
+        OAI-PMH parameter selecting a metadata format; KURENAI supports oai_dc,
+        jpcoar_2.0, and didl.
+      tags: [oai-pmh, metadata, format]
+    - term: resumptionToken
+      definition: >-
+        Opaque token returned by OAI-PMH list verbs to page through large result
+        sets.
+      tags: [oai-pmh, pagination]
+    - term: isBulletin
+      definition: >-
+        DSpace community flag indicating whether the community represents an
+        academic bulletin series.
+      tags: [dspace, community, flag]
+    - term: archivedItemsCount
+      definition: The number of archived items contained within a community or collection.
+      tags: [dspace, count, metric]

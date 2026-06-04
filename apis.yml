@@ -44,6 +44,8 @@ apis:
     properties:
       - type: Documentation
         url: https://repository.kulib.kyoto-u.ac.jp/
+      - type: OpenAPI
+        url: openapi/kyoto-kurenai-oai.yaml
   - aid: kyoto:sso
     name: Kyoto University Integrated Authentication (Shibboleth/SAML)
     description: >-

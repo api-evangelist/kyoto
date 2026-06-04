@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://repository.kulib.kyoto-u.ac.jp/structures/community.json",
+  "name": "Community",
+  "description": "JSON Structure for a KURENAI (DSpace 7.6) community object.",
+  "type": "object",
+  "properties": {
+    "uuid": { "type": "string" },
+    "name": { "type": "string" },
+    "handle": { "type": "string" },
+    "archivedItemsCount": { "type": "int32" },
+    "isBulletin": { "type": "boolean" },
+    "type": { "type": "string" },
+    "metadata": {
+      "type": "map",
+      "values": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "value": { "type": "string" },
+            "language": { "type": ["null", "string"] },
+            "authority": { "type": ["null", "string"] },
+            "confidence": { "type": "int32" },
+            "place": { "type": "int32" }
+          },
+          "required": ["value"]
+        }
+      }
+    }
+  },
+  "required": ["uuid", "name", "handle", "type"]
+}

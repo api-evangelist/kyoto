@@ -1,0 +1,31 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "@vocab": "https://repository.kulib.kyoto-u.ac.jp/ns#",
+    "University": "schema:CollegeOrUniversity",
+    "name": "schema:name",
+    "url": "schema:url",
+    "Repository": "schema:DataCatalog",
+    "Community": "schema:CollectionPage",
+    "Collection": "schema:Collection",
+    "Item": "schema:CreativeWork",
+    "handle": { "@id": "dcterms:identifier" },
+    "uuid": { "@id": "schema:identifier" },
+    "title": { "@id": "dcterms:title" },
+    "metadata": { "@id": "schema:additionalProperty" },
+    "archivedItemsCount": { "@id": "schema:size" },
+    "isBulletin": "schema:isPartOf",
+    "type": "@type",
+    "_links": { "@id": "schema:url", "@type": "@id" }
+  },
+  "@type": "University",
+  "name": "Kyoto University",
+  "url": "https://www.kyoto-u.ac.jp/en",
+  "Repository": {
+    "@type": "Repository",
+    "name": "Kyoto University Research Information Repository (KURENAI)",
+    "url": "https://repository.kulib.kyoto-u.ac.jp/"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://repository.kulib.kyoto-u.ac.jp/schemas/community.json",
+  "title": "KURENAI Community",
+  "description": "A DSpace community in the Kyoto University Research Information Repository (KURENAI), as returned by /server/api/core/communities.",
+  "type": "object",
+  "required": ["uuid", "name", "handle", "type"],
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "uuid": { "type": "string", "format": "uuid" },
+    "name": { "type": "string" },
+    "handle": { "type": "string", "examples": ["2433/36038"] },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": { "$ref": "#/$defs/metadataValue" }
+      }
+    },
+    "archivedItemsCount": { "type": "integer", "minimum": 0 },
+    "isBulletin": { "type": "boolean" },
+    "type": { "type": "string", "const": "community" },
+    "_links": { "type": "object" }
+  },
+  "$defs": {
+    "metadataValue": {
+      "type": "object",
+      "required": ["value"],
+      "properties": {
+        "value": { "type": "string" },
+        "language": { "type": ["string", "null"] },
+        "authority": { "type": ["string", "null"] },
+        "confidence": { "type": "integer" },
+        "place": { "type": "integer" }
+      }
+    }
+  }
+}

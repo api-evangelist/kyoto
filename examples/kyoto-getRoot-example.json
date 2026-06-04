@@ -1,0 +1,13 @@
+{
+  "dspaceUI": "https://repository.kulib.kyoto-u.ac.jp",
+  "dspaceName": "Kyoto University Research Information Repository",
+  "dspaceServer": "https://repository.kulib.kyoto-u.ac.jp/server",
+  "dspaceVersion": "DSpace 7.6",
+  "type": "root",
+  "_links": {
+    "authn": { "href": "https://repository.kulib.kyoto-u.ac.jp/server/api/authn" },
+    "bitstreams": { "href": "https://repository.kulib.kyoto-u.ac.jp/server/api/core/bitstreams" },
+    "communities": { "href": "https://repository.kulib.kyoto-u.ac.jp/server/api/core/communities" },
+    "collections": { "href": "https://repository.kulib.kyoto-u.ac.jp/server/api/core/collections" }
+  }
+}

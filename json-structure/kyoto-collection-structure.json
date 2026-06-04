@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://repository.kulib.kyoto-u.ac.jp/structures/collection.json",
+  "name": "Collection",
+  "description": "JSON Structure for a KURENAI (DSpace 7.6) collection object.",
+  "type": "object",
+  "properties": {
+    "uuid": { "type": "string" },
+    "name": { "type": "string" },
+    "handle": { "type": "string" },
+    "archivedItemsCount": { "type": "int32" },
+    "type": { "type": "string" }
+  },
+  "required": ["uuid", "name", "handle", "type"]
+}

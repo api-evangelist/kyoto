@@ -1,0 +1,47 @@
+{
+  "_embedded": {
+    "communities": [
+      {
+        "id": "c4297315-690e-4eac-8a18-109ab8513efd",
+        "uuid": "c4297315-690e-4eac-8a18-109ab8513efd",
+        "name": "001　総長 = 001_Presidents of Kyoto University",
+        "handle": "2433/36038",
+        "metadata": {
+          "dc.identifier.uri": [
+            {
+              "value": "http://hdl.handle.net/2433/36038",
+              "language": null,
+              "authority": null,
+              "confidence": -1,
+              "place": 0
+            }
+          ],
+          "dc.title": [
+            {
+              "value": "001　総長 = 001_Presidents of Kyoto University",
+              "language": null,
+              "authority": null,
+              "confidence": -1,
+              "place": 0
+            }
+          ]
+        },
+        "archivedItemsCount": 9,
+        "isBulletin": false,
+        "type": "community",
+        "_links": {
+          "collections": {
+            "href": "https://repository.kulib.kyoto-u.ac.jp/server/api/core/communities/c4297315-690e-4eac-8a18-109ab8513efd/collections"
+          },
+          "self": {
+            "href": "https://repository.kulib.kyoto-u.ac.jp/server/api/core/communities/c4297315-690e-4eac-8a18-109ab8513efd"
+          }
+        }
+      }
+    ]
+  },
+  "page": {
+    "size": 1,
+    "number": 0
+  }
+}
