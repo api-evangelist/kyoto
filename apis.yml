@@ -60,6 +60,8 @@ apis:
       - type: Documentation
         url: https://www.iimc.kyoto-u.ac.jp/en/services/account/auth-system
 common:
+  - type: DomainSecurity
+    url: security/kyoto-domain-security.yml
   - type: Website
     url: https://www.kyoto-u.ac.jp/en
   - type: GitHub
