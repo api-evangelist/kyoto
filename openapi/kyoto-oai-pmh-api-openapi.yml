@@ -1,0 +1,77 @@
+openapi: 3.0.3
+info:
+  title: KURENAI Repository API (DSpace 7.6 REST + ) OAI-PMH API
+  description: 'Machine-readable interfaces for the Kyoto University Research Information Repository (KURENAI), a DSpace 7.6 instance. Two confirmed-live surfaces are described: the DSpace REST API (HAL+JSON) rooted at /server/api, and the OAI-PMH 2.0 metadata harvesting endpoint at /server/oai/request. Only paths and shapes verified against the live system are included. Item-level REST endpoints require authentication; the public surfaces (root, communities, collections, OAI-PMH) are anonymous.'
+  version: 1.0.0
+  contact:
+    name: KURENAI Repository Administration
+    email: repository@mail2.adm.kyoto-u.ac.jp
+servers:
+- url: https://repository.kulib.kyoto-u.ac.jp
+  description: Kyoto University Research Information Repository (KURENAI)
+tags:
+- name: OAI-PMH
+  description: OAI-PMH 2.0 metadata harvesting interface
+paths:
+  /server/oai/request:
+    get:
+      tags:
+      - OAI-PMH
+      operationId: oaiRequest
+      summary: OAI-PMH 2.0 request endpoint
+      description: Single OAI-PMH 2.0 endpoint. The verb parameter selects the operation. Responses are OAI-PMH XML. Supported metadata prefixes include oai_dc, jpcoar_2.0, and didl.
+      parameters:
+      - name: verb
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - Identify
+          - ListMetadataFormats
+          - ListSets
+          - ListIdentifiers
+          - ListRecords
+          - GetRecord
+      - name: metadataPrefix
+        in: query
+        required: false
+        schema:
+          type: string
+          example: oai_dc
+      - name: identifier
+        in: query
+        required: false
+        schema:
+          type: string
+          example: oai:repository.kulib.kyoto-u.ac.jp:2433/1234
+      - name: set
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: from
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: until
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: resumptionToken
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OAI-PMH XML response
+          content:
+            text/xml:
+              schema:
+                type: string
+                description: OAI-PMH 2.0 XML document
