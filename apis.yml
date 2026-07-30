@@ -13,9 +13,21 @@ description: >-
   information, course, and timetable systems are gated behind campus accounts
   and are not publicly documented APIs.
 type: Index
+accessModel:
+  pricing: free
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Free
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/kyoto.png
 url: https://raw.githubusercontent.com/api-evangelist/kyoto/refs/heads/main/apis.yml
 tags:
   - Education
@@ -30,35 +42,47 @@ created: '2026-06-03'
 modified: '2026-06-03'
 specificationVersion: '0.19'
 apis:
-  - aid: kyoto:kurenai-oai
-    name: KURENAI OAI-PMH Metadata API
-    description: >-
-      The Kyoto University Research Information Repository (KURENAI), built on
-      DSpace, exposes an OAI-PMH 2.0 metadata harvesting endpoint for its
-      bulletins, dissertations, and academic journal articles. Verified live via
-      the Identify verb (repositoryName "Kyoto University Research Information
-      Repository", admin email repository@mail2.adm.kyoto-u.ac.jp).
-    humanURL: https://repository.kulib.kyoto-u.ac.jp/
-    baseURL: https://repository.kulib.kyoto-u.ac.jp/server/oai/request
-    tags: [ Repository, OAI-PMH, Metadata, Scholarly, Open Access, Research ]
-    properties:
-      - type: Documentation
-        url: https://repository.kulib.kyoto-u.ac.jp/
-      - type: OpenAPI
-        url: openapi/kyoto-kurenai-oai.yaml
-  - aid: kyoto:sso
-    name: Kyoto University Integrated Authentication (Shibboleth/SAML)
-    description: >-
-      The Institute for Information Management and Communication (IIMC) operates
-      a Shibboleth-based SAML identity provider for university-wide accounts
-      (SPS-ID / ECS-ID) with multi-factor authentication. Federation/SP
-      connections require committee approval; this is institutional SSO
-      infrastructure, not a public self-service API.
-    humanURL: https://www.iimc.kyoto-u.ac.jp/en/services/account/auth-system
-    tags: [ Authentication, SSO, Shibboleth, SAML, Identity ]
-    properties:
-      - type: Documentation
-        url: https://www.iimc.kyoto-u.ac.jp/en/services/account/auth-system
+- aid: kyoto:sso
+  name: Kyoto University Integrated Authentication (Shibboleth/SAML)
+  description: >-
+    The Institute for Information Management and Communication (IIMC) operates a Shibboleth-based SAML
+    identity provider for university-wide accounts (SPS-ID / ECS-ID) with multi-factor authentication.
+    Federation/SP connections require committee approval; this is institutional SSO infrastructure, not
+    a public self-service API.
+  humanURL: https://www.iimc.kyoto-u.ac.jp/en/services/account/auth-system
+  tags:
+  - Authentication
+  - SSO
+  - Shibboleth
+  - SAML
+  - Identity
+  properties:
+  - type: Documentation
+    url: https://www.iimc.kyoto-u.ac.jp/en/services/account/auth-system
+- aid: kyoto:kyoto-oai-pmh-api
+  name: Kyoto University OAI-PMH API
+  description: OAI-PMH 2.0 metadata harvesting interface
+  humanURL: https://repository.kulib.kyoto-u.ac.jp/
+  baseURL: https://repository.kulib.kyoto-u.ac.jp/server/oai/request
+  tags:
+  - OAI-PMH
+  properties:
+  - type: OpenAPI
+    url: openapi/kyoto-oai-pmh-api-openapi.yml
+  - type: Documentation
+    url: https://repository.kulib.kyoto-u.ac.jp/
+- aid: kyoto:kyoto-rest-api
+  name: Kyoto University REST API
+  description: DSpace 7.6 HAL+JSON REST API
+  humanURL: https://repository.kulib.kyoto-u.ac.jp/
+  baseURL: https://repository.kulib.kyoto-u.ac.jp/server/oai/request
+  tags:
+  - REST
+  properties:
+  - type: OpenAPI
+    url: openapi/kyoto-rest-api-openapi.yml
+  - type: Documentation
+    url: https://repository.kulib.kyoto-u.ac.jp/
 common:
   - type: AgenticAccess
     url: agentic-access/kyoto-agentic-access.yml
