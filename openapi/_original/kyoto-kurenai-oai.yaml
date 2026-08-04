@@ -1,0 +1,329 @@
+openapi: 3.0.3
+info:
+  title: KURENAI Repository API (DSpace 7.6 REST + OAI-PMH)
+  description: >-
+    Machine-readable interfaces for the Kyoto University Research Information
+    Repository (KURENAI), a DSpace 7.6 instance. Two confirmed-live surfaces are
+    described: the DSpace REST API (HAL+JSON) rooted at /server/api, and the
+    OAI-PMH 2.0 metadata harvesting endpoint at /server/oai/request. Only paths
+    and shapes verified against the live system are included. Item-level REST
+    endpoints require authentication; the public surfaces (root, communities,
+    collections, OAI-PMH) are anonymous.
+  version: '1.0.0'
+  contact:
+    name: KURENAI Repository Administration
+    email: repository@mail2.adm.kyoto-u.ac.jp
+servers:
+  - url: https://repository.kulib.kyoto-u.ac.jp
+    description: Kyoto University Research Information Repository (KURENAI)
+tags:
+  - name: REST
+    description: DSpace 7.6 HAL+JSON REST API
+  - name: OAI-PMH
+    description: OAI-PMH 2.0 metadata harvesting interface
+paths:
+  /server/api:
+    get:
+      tags: [REST]
+      operationId: getRoot
+      summary: REST API root / HAL entry point
+      description: Returns the DSpace REST root document with version and HAL _links to all endpoints.
+      responses:
+        '200':
+          description: Root document
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/RestRoot'
+  /server/api/core/communities:
+    get:
+      tags: [REST]
+      operationId: listCommunities
+      summary: List top-level and all communities
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Size'
+      responses:
+        '200':
+          description: Paginated list of communities
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CommunityPage'
+  /server/api/core/communities/{uuid}:
+    get:
+      tags: [REST]
+      operationId: getCommunity
+      summary: Retrieve a single community by UUID
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+      responses:
+        '200':
+          description: A community
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Community'
+        '404':
+          $ref: '#/components/responses/Error'
+  /server/api/core/collections:
+    get:
+      tags: [REST]
+      operationId: listCollections
+      summary: List collections
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Size'
+      responses:
+        '200':
+          description: Paginated list of collections
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionPage'
+  /server/api/core/items:
+    get:
+      tags: [REST]
+      operationId: listItems
+      summary: List items (authentication required)
+      responses:
+        '401':
+          $ref: '#/components/responses/Error'
+  /server/oai/request:
+    get:
+      tags: [OAI-PMH]
+      operationId: oaiRequest
+      summary: OAI-PMH 2.0 request endpoint
+      description: >-
+        Single OAI-PMH 2.0 endpoint. The verb parameter selects the operation.
+        Responses are OAI-PMH XML. Supported metadata prefixes include
+        oai_dc, jpcoar_2.0, and didl.
+      parameters:
+        - name: verb
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [Identify, ListMetadataFormats, ListSets, ListIdentifiers, ListRecords, GetRecord]
+        - name: metadataPrefix
+          in: query
+          required: false
+          schema:
+            type: string
+            example: oai_dc
+        - name: identifier
+          in: query
+          required: false
+          schema:
+            type: string
+            example: oai:repository.kulib.kyoto-u.ac.jp:2433/1234
+        - name: set
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: from
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: until
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: resumptionToken
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OAI-PMH XML response
+          content:
+            text/xml:
+              schema:
+                type: string
+                description: OAI-PMH 2.0 XML document
+components:
+  parameters:
+    Page:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    Size:
+      name: size
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 20
+    Uuid:
+      name: uuid
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  responses:
+    Error:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    RestRoot:
+      type: object
+      properties:
+        dspaceUI:
+          type: string
+          format: uri
+        dspaceName:
+          type: string
+        dspaceServer:
+          type: string
+          format: uri
+        dspaceVersion:
+          type: string
+          example: DSpace 7.6
+        type:
+          type: string
+          example: root
+        _links:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              href:
+                type: string
+                format: uri
+    MetadataValue:
+      type: object
+      properties:
+        value:
+          type: string
+        language:
+          type: string
+          nullable: true
+        authority:
+          type: string
+          nullable: true
+        confidence:
+          type: integer
+        place:
+          type: integer
+    Community:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        uuid:
+          type: string
+          format: uuid
+        name:
+          type: string
+        handle:
+          type: string
+          example: 2433/36038
+        metadata:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/MetadataValue'
+        archivedItemsCount:
+          type: integer
+        isBulletin:
+          type: boolean
+        type:
+          type: string
+          example: community
+        _links:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              href:
+                type: string
+                format: uri
+    Collection:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        uuid:
+          type: string
+          format: uuid
+        name:
+          type: string
+        handle:
+          type: string
+          example: 2433/126120
+        archivedItemsCount:
+          type: integer
+        type:
+          type: string
+          example: collection
+    PageMeta:
+      type: object
+      properties:
+        size:
+          type: integer
+        totalElements:
+          type: integer
+        totalPages:
+          type: integer
+        number:
+          type: integer
+    CommunityPage:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            communities:
+              type: array
+              items:
+                $ref: '#/components/schemas/Community'
+        page:
+          $ref: '#/components/schemas/PageMeta'
+        _links:
+          type: object
+    CollectionPage:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            collections:
+              type: array
+              items:
+                $ref: '#/components/schemas/Collection'
+        page:
+          $ref: '#/components/schemas/PageMeta'
+        _links:
+          type: object
+    Error:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        status:
+          type: integer
+        error:
+          type: string
+        message:
+          type: string
+        path:
+          type: string

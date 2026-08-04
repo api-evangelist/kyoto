@@ -1,0 +1,16 @@
+{
+  "provider": "kyoto",
+  "sources": [
+    "kyoto-oai-pmh-api-openapi.yml",
+    "kyoto-rest-api-openapi.yml"
+  ],
+  "outputs": [
+    "kyoto-oai-pmh-api-openapi.yml",
+    "kyoto-rest-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
