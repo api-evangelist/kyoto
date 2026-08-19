@@ -2,102 +2,261 @@
 aid: kyoto
 name: Kyoto University
 description: >-
-  Kyoto University is a national research university in Kyoto, Japan, ranked #37
-  in the QS World University Rankings 2025. Its public, machine-readable
-  developer footprint is centered on scholarly and open-source infrastructure
-  rather than a centralized developer portal. Confirmed public surfaces include
-  the KURENAI research information repository (DSpace) with a live OAI-PMH
-  metadata endpoint, the kyoto-u "Kyoto University Open Source Project" GitHub
-  organization, and a Shibboleth/SAML integrated authentication system operated
-  by the Institute for Information Management and Communication (IIMC). Student
-  information, course, and timetable systems are gated behind campus accounts
-  and are not publicly documented APIs.
+  Kyoto University (京都大学) is a national research university in Kyoto, Japan, established in 1897 and
+  ranked #36 in the QS World University Rankings. It operates no developer portal, no API gateway, no
+  API terms of service and no OpenAPI of its own, and this profile records that plainly. What it does
+  run, on its own hosts and its own network, is a small set of genuinely institution-operated
+  machine-readable surfaces: KURENAI, the Kyoto University Research Information Repository, a
+  self-hosted DSpace 7.6 with an anonymous HAL+JSON REST API and an OAI-PMH 2.0 endpoint serving 15
+  metadata formats including JPCOAR and junii2, holding content back to 2006; PandA, the university's
+  Sakai Learning Support System, whose Entity Broker answers JSON on 53 registered entity prefixes
+  and which is a live IMS LTI 1.3 platform publishing its own signing keyset alongside a working LTI
+  1.1 outcomes service; and its own Shibboleth SAML 2.0 identity provider, registered in GakuNin, the
+  Japanese academic federation, which participates in eduGAIN. Those surfaces sit on hosts inside
+  133.3.0.0/16, registered by JPNIC to Kyoto University as KUINS, or in the university's own AWS
+  account. Five of the twelve Kin Score education-regime standards are met with live evidence —
+  oai-pmh, shibboleth, saml, lti and orcid — which is unusual for this cohort and entirely
+  first-party. Everything else is a human-facing service: the KULINE library catalogue, the KDB
+  researcher database, OpenCourseWare, and the generative-AI tooling the IIMC brokers from Google and
+  Microsoft. Student information, course registration and timetable systems are behind campus
+  accounts and are not public APIs.
+x-type: university
+x-category: Public Research University
 type: Index
-accessModel:
-  pricing: free
-  onboarding: unknown
-  trial: false
-  try_now: false
-  public: false
-  label: Free
-  confidence: medium
-  source:
-  - plans
-  generated: '2026-07-22'
-  method: derived
 position: Consumer
 access: 3rd-Party
+accessModel:
+  pricing: free
+  onboarding: none
+  trial: false
+  try_now: true
+  public: true
+  label: Free · No registration for the institution-operated public reads
+  confidence: high
+  source:
+  - authentication
+  - probed
+  generated: '2026-08-19'
+  method: probed
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/kyoto.png
 url: https://raw.githubusercontent.com/api-evangelist/kyoto/refs/heads/main/apis.yml
 tags:
-  - Education
-  - Higher Education
   - University
-  - Research
-  - Open Data
-  - Scholarly
-  - Repository
+  - Higher Education
+  - Education
   - Japan
+  - National University
+  - Research Repository
+  - Research Data
+  - Identity Federation
+  - Learning Management
+  - Open Access
+  - Research Computing
+  - Scholarly
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-19'
 specificationVersion: '0.23'
 apis:
-- aid: kyoto:sso
-  name: Kyoto University Integrated Authentication (Shibboleth/SAML)
-  description: >-
-    The Institute for Information Management and Communication (IIMC) operates a Shibboleth-based SAML
-    identity provider for university-wide accounts (SPS-ID / ECS-ID) with multi-factor authentication.
-    Federation/SP connections require committee approval; this is institutional SSO infrastructure, not
-    a public self-service API.
-  humanURL: https://www.iimc.kyoto-u.ac.jp/en/services/account/auth-system
-  tags:
-  - Authentication
-  - SSO
-  - Shibboleth
-  - SAML
-  - Identity
-  properties:
-  - type: Documentation
-    url: https://www.iimc.kyoto-u.ac.jp/en/services/account/auth-system
 - aid: kyoto:kyoto-oai-pmh-api
-  name: Kyoto University OAI-PMH API
-  description: OAI-PMH 2.0 metadata harvesting interface
+  name: KURENAI OAI-PMH API
+  description: >-
+    OAI-PMH 2.0 metadata harvesting interface for KURENAI, the Kyoto University Research Information
+    Repository. Anonymous, verb-driven, and serving 15 metadata formats including jpcoar_2.0 and
+    jpcoar_1.0 (Japan Consortium for Open Access Repositories), junii2 for NII IRDB harvesting,
+    oai_dc, mods, mets, ore, didl, qdc, etdms, marc and rdf. Identify reports protocol version 2.0,
+    an earliest datestamp of 2006-06-05 and deletedRecord policy "transient". Records carry ORCID,
+    ROR, e-Rad and kakenhi identifiers.
   humanURL: https://repository.kulib.kyoto-u.ac.jp/
   baseURL: https://repository.kulib.kyoto-u.ac.jp/server/oai/request
+  x-operator: institution
+  x-operator-evidence: >-
+    repository.kulib.kyoto-u.ac.jp is under Kyoto University's own registrable domain and resolves to
+    133.3.249.138, in a block JPNIC registers as network KUINS-UJI, organization "Kyoto University".
+    DSpace is open-source software the university self-hosts, not a vendor tenancy: the REST root
+    names the instance "Kyoto University Research Information Repository" and the OAI-PMH admin
+    contact is repository@mail2.adm.kyoto-u.ac.jp.
   tags:
   - OAI-PMH
+  - Research Repository
+  - Open Access
+  - Metadata
   properties:
   - type: OpenAPI
     url: openapi/kyoto-oai-pmh-api-openapi.yml
   - type: Documentation
     url: https://repository.kulib.kyoto-u.ac.jp/
+  - type: Examples
+    url: examples/kyoto-oaiIdentify-example.json
+  - type: Collection
+    url: collections/kyoto-oai-pmh-api.postman_collection.json
 - aid: kyoto:kyoto-rest-api
-  name: Kyoto University REST API
-  description: DSpace 7.6 HAL+JSON REST API
+  name: KURENAI DSpace REST API
+  description: >-
+    The DSpace 7.6 HAL+JSON REST API of the Kyoto University Research Information Repository. The
+    root document at /server/api advertises every endpoint as HAL links and reports dspaceVersion
+    "DSpace 7.6"; community and collection listings are anonymous reads. Item submission and
+    administrative endpoints require a repository account and were not exercised.
   humanURL: https://repository.kulib.kyoto-u.ac.jp/
-  baseURL: https://repository.kulib.kyoto-u.ac.jp/server/oai/request
+  baseURL: https://repository.kulib.kyoto-u.ac.jp/server/api
+  x-operator: institution
+  x-operator-evidence: >-
+    Same host and same network as the OAI-PMH surface: Kyoto University's own registrable domain on
+    the university's JPNIC-registered KUINS network. Note that the front end returns HTTP 200 with an
+    Angular shell for paths that do not exist, so only /server/api and /server/oai/request carry real
+    machine-readable content.
   tags:
   - REST
+  - Research Repository
+  - DSpace
+  - HAL
   properties:
   - type: OpenAPI
     url: openapi/kyoto-rest-api-openapi.yml
   - type: Documentation
     url: https://repository.kulib.kyoto-u.ac.jp/
+  - type: Examples
+    url: examples/kyoto-getRoot-example.json
+  - type: JSONSchema
+    url: json-schema/kyoto-community-schema.json
+  - type: Collection
+    url: collections/kyoto-rest-api.postman_collection.json
+- aid: kyoto:kyoto-lms-api
+  name: PandA Learning Support System API (Sakai Entity Broker + IMS LTI)
+  description: >-
+    PandA is the Kyoto University Learning Support System, a Sakai deployment operated by the
+    Institute for Information Management and Communication and published by the IIMC as the
+    university's own education service. Its Sakai Entity Broker at /direct self-describes 53
+    registered entity prefixes and answers application/json anonymously: the tool registry returns
+    all 96 registered tools with their required Sakai permissions, while session-scoped prefixes
+    (site, syllabus, announcement, assignment, calendar, content, lti) return an empty collection and
+    the user directory is closed with a 403. Separately, PandA is a live IMS LTI 1.3 platform — it
+    publishes a JWKS of three RS256 signing keys at /imsblis/lti13/keyset — and still runs the LTI
+    1.1 Basic Outcomes service, which answers with an IMS message_response envelope. No credential
+    was sent to any endpoint and no authentication was attempted.
+  humanURL: https://www.iimc.kyoto-u.ac.jp/en/services/education/lms
+  baseURL: https://panda.ecs.kyoto-u.ac.jp
+  x-operator: institution
+  x-operator-evidence: >-
+    panda.ecs.kyoto-u.ac.jp is under Kyoto University's own registrable domain and is published by
+    the IIMC as the university's Learning Support Service at
+    https://www.iimc.kyoto-u.ac.jp/en/services/education/lms. Sakai is open-source software the
+    university self-deploys — there is no vendor tenancy, no vendor contact and no vendor host in the
+    chain; the tool registry, the LTI platform keys and the login are Kyoto University's. Discovered
+    2026-08-19; this surface was entirely absent from the June 2026 profile.
+  tags:
+  - LMS
+  - Sakai
+  - LTI
+  - Education
+  - Learning Management
+  properties:
+  - type: OpenAPI
+    url: openapi/kyoto-lms-api-openapi.yml
+  - type: Documentation
+    url: https://www.iimc.kyoto-u.ac.jp/en/services/education/lms
+  - type: Examples
+    url: examples/kyoto-panda-tool-example.json
+  - type: Examples
+    url: examples/kyoto-lti13-keyset-example.json
+  - type: JSONSchema
+    url: json-schema/kyoto-panda-tool-schema.json
+  - type: JSONSchema
+    url: json-schema/kyoto-panda-entity-collection-schema.json
+- aid: kyoto:sso
+  name: Kyoto University Shibboleth Identity Provider (GakuNin)
+  description: >-
+    Kyoto University operates its own Shibboleth SAML 2.0 identity provider, run by the Institute for
+    Information Management and Communication, with public machine-readable metadata at the canonical
+    /idp/shibboleth location. The EntityDescriptor declares
+    entityID https://authidp1.iimc.kyoto-u.ac.jp/idp/shibboleth, a shibmd:Scope of kyoto-u.ac.jp, and
+    single sign-on over SAML 2.0 HTTP-POST, HTTP-Redirect and the legacy Shibboleth 1.0 profile. The
+    IdP is a registered member of GakuNin, the Japanese academic access management federation operated
+    by the National Institute of Informatics and an eduGAIN participant; the federation aggregate also
+    carries Kyoto's supercomputer service provider,
+    entityID https://web.kudpc.kyoto-u.ac.jp/shibboleth-sp, for the Academic Center for Computing and
+    Media Studies. University accounts are SPS-ID (faculty and staff) and ECS-ID (students), with
+    multi-factor authentication. Service-provider connections require committee approval: this is
+    institutional SSO infrastructure, not a self-service API.
+  humanURL: https://www.iimc.kyoto-u.ac.jp/en/services/account/auth-system
+  baseURL: https://authidp1.iimc.kyoto-u.ac.jp/idp/shibboleth
+  x-operator: institution
+  x-operator-evidence: >-
+    Both federation entities are under kyoto-u.ac.jp. The IdP metadata is served from the university's
+    own AWS account (alb-authidp01-562568956.ap-northeast-1.elb.amazonaws.com) and names the IIMC as
+    the operating organization with contact authidp@iimc.kyoto-u.ac.jp. Federation membership is an
+    institution-operated fact by definition — no vendor sits between Kyoto University and this metadata.
+  tags:
+  - Identity Federation
+  - Shibboleth
+  - SAML
+  - SSO
+  - GakuNin
+  properties:
+  - type: Documentation
+    url: https://www.iimc.kyoto-u.ac.jp/en/services/account/auth-system
+  - type: Metadata
+    url: https://authidp1.iimc.kyoto-u.ac.jp/idp/shibboleth
+  - type: Authentication
+    url: authentication/kyoto-authentication.yml
+  - type: Metadata
+    url: authentication/kyoto-saml-idp-metadata.xml
 common:
+  - type: Website
+    url: https://www.kyoto-u.ac.jp/en
+  - type: ResearchRepository
+    url: https://repository.kulib.kyoto-u.ac.jp/
+  - type: IdentityFederation
+    url: https://authidp1.iimc.kyoto-u.ac.jp/idp/shibboleth
+  - type: Learning
+    url: https://www.iimc.kyoto-u.ac.jp/en/services/education/lms
+  - type: ResearchComputing
+    url: https://www.iimc.kyoto-u.ac.jp/en/services/comp
+  - type: LibraryCatalog
+    url: https://kuline.kulib.kyoto-u.ac.jp/opac/opac_search/
+  - type: Library
+    url: https://www.kulib.kyoto-u.ac.jp/
+  - type: ResearchPortal
+    url: https://kdb.iimc.kyoto-u.ac.jp/
+  - type: AITooling
+    url: https://www.iimc.kyoto-u.ac.jp/en/services/gen-ai
+  - type: Documentation
+    url: https://www.iimc.kyoto-u.ac.jp/en/services
+  - type: GitHub
+    url: https://github.com/kyoto-u
+  - type: TermsOfService
+    url: https://www.kyoto-u.ac.jp/en/site-policy
+  - type: PrivacyPolicy
+    url: https://www.kyoto-u.ac.jp/en/privacy-policy
+  - type: Support
+    url: https://www.kyoto-u.ac.jp/en/contact
+  - type: LinkedIn
+    url: https://www.linkedin.com/school/kyoto-university/
+  - type: Twitter
+    url: https://x.com/KyotoU_News
+  - type: YouTube
+    url: https://www.youtube.com/c/KyotoUniversityOfficial
+  - type: Conformance
+    url: conformance/kyoto-education-standards-conformance.yml
+  - type: Authentication
+    url: authentication/kyoto-authentication.yml
+  - type: Errors
+    url: errors/kyoto-errors.yml
+  - type: Scopes
+    url: scopes/kyoto-scopes.yml
+  - type: Lifecycle
+    url: lifecycle/kyoto-lifecycle.yml
+  - type: Vocabulary
+    url: vocabulary/kyoto-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/kyoto-context.jsonld
+  - type: Rules
+    url: rules/kyoto-rules.yml
+  - type: Rules
+    url: rules/kyoto-jsonschema-spectral-rules.yml
   - type: AgenticAccess
     url: agentic-access/kyoto-agentic-access.yml
   - type: DomainSecurity
     url: security/kyoto-domain-security.yml
-  - type: Website
-    url: https://www.kyoto-u.ac.jp/en
-  - type: GitHub
-    url: https://github.com/kyoto-u
-  - type: LinkedIn
-    url: https://www.linkedin.com/school/kyoto-university/
-  - type: Twitter
-    url: https://twitter.com/Kyoto_Univ_PR
-  - type: Authentication
-    url: https://www.iimc.kyoto-u.ac.jp/en/services/account/auth-system
   - type: Plans
     url: plans/kyoto-plans-pricing.yml
   - type: RateLimits
@@ -106,6 +265,89 @@ common:
     url: finops/kyoto-finops.yml
   - type: Review
     url: review.yml
+x-coverage:
+  state: covered
+  reason: institution_operated_surfaces_verified
+  detail: >-
+    Kyoto University operates four public machine-readable surfaces that were verified live on
+    2026-08-19, all of them first-party: the KURENAI DSpace 7.6 REST API, the KURENAI OAI-PMH 2.0
+    endpoint, the PandA (Sakai) Entity Broker with its IMS LTI 1.3 keyset and LTI 1.1 outcomes
+    service, and its own Shibboleth SAML 2.0 identity provider registered in GakuNin. The PandA LMS
+    and the SAML identity federation were both absent from the June 2026 profile and are new here;
+    the REST API's baseURL was also wrong in that profile, pointing at the OAI-PMH path. No vendor
+    contract is credited to this institution and none needed to be removed: the audit found six
+    institution verdicts, zero tenant and zero vendor surfaces. kyoto-u.figshare.com was checked and
+    rejected as wildcard DNS, not a tenancy — a nonsense control subdomain returns the identical
+    HTTP 202 zero-byte response. What Kyoto does not publish is equally clear: no developer portal,
+    no API gateway, no OAuth authorization server, no API keys, no changelog, no status page, no
+    versioning or deprecation policy, no error reference, and no OpenAPI of its own — every
+    specification in this repository was written by API Evangelist from live probes and is marked as
+    such. Two surfaces are gated rather than absent and are recorded but not credited: the ORCID
+    integration service ris-orcid.iimc.kyoto-u.ac.jp does not answer from the public internet, and
+    the Kyoto University Generative AI Information Portal is a Google Sites page behind a
+    kyoto-u.ac.jp Workspace sign-in, so no public AIPolicy pointer is claimed.
+  evidence:
+  - url: https://repository.kulib.kyoto-u.ac.jp/server/oai/request?verb=Identify
+    status: 200
+  - url: https://repository.kulib.kyoto-u.ac.jp/server/oai/request?verb=ListMetadataFormats
+    status: 200
+    note: 15 metadata formats including jpcoar_2.0 and junii2
+  - url: https://repository.kulib.kyoto-u.ac.jp/server/api
+    status: 200
+    note: 'dspaceVersion "DSpace 7.6"'
+  - url: https://repository.kulib.kyoto-u.ac.jp/server/api/core/communities
+    status: 200
+  - url: https://panda.ecs.kyoto-u.ac.jp/direct/describe
+    status: 200
+    note: 53 registered Sakai entity prefixes
+  - url: https://panda.ecs.kyoto-u.ac.jp/direct/tool.json
+    status: 200
+    note: 96 registered tools, fully public
+  - url: https://panda.ecs.kyoto-u.ac.jp/imsblis/lti13/keyset
+    status: 200
+    note: LTI 1.3 platform JWKS, three RS256 keys
+  - url: https://panda.ecs.kyoto-u.ac.jp/imsblis/service/
+    status: 200
+    note: LTI 1.1 Basic Outcomes service answering with an IMS message_response envelope
+  - url: https://panda.ecs.kyoto-u.ac.jp/direct/user.json
+    status: 403
+    note: user directory closed to anonymous callers - gated, not dead
+  - url: https://authidp1.iimc.kyoto-u.ac.jp/idp/shibboleth
+    status: 200
+    note: SAML 2.0 EntityDescriptor, application/xml, shibmd:Scope kyoto-u.ac.jp
+  - url: https://metadata.gakunin.nii.ac.jp/gakunin-metadata.xml
+    status: 200
+    note: GakuNin aggregate carries Kyoto's IdP and its KUDPC supercomputer SP
+  - url: https://kdb.iimc.kyoto-u.ac.jp/
+    status: 200
+    note: researcher database live, no API
+  - url: https://kuline.kulib.kyoto-u.ac.jp/opac/opac_search/
+    status: 200
+    note: library catalogue, human-facing only
+  - url: https://repository.kulib.kyoto-u.ac.jp/.well-known/security.txt
+    status: 200
+    note: SOFT-404 - Angular shell, not a security.txt; not credited
+  - url: https://repository.kulib.kyoto-u.ac.jp/feed/rss_2.0/site
+    status: 200
+    note: SOFT-404 - same shell; no repository feed exists
+  - url: https://ris-orcid.iimc.kyoto-u.ac.jp/
+    status: 0
+    note: IIMC ORCID integration does not answer publicly - campus-scoped, gated
+  - url: https://sites.google.com/kyoto-u.ac.jp/ku-gen-ai-info-portal
+    status: 200
+    note: redirects to Google sign-in - the AI portal is gated, so no public AIPolicy pointer is claimed
+  - url: https://kyoto-u.figshare.com/
+    status: 202
+    note: >-
+      wildcard, not a tenancy - notarealtenant19x7q.figshare.com returns the identical 202 with a
+      zero-length body
+  - url: https://twitter.com/Kyoto_Univ_PR
+    status: 404
+    note: dead handle removed from this profile; the official account is x.com/KyotoU_News
+  - url: https://www.kyoto-u.ac.jp/en/llms.txt
+    status: 404
+    note: no llms.txt on any Kyoto University host
+  probed: '2026-08-19'
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
