@@ -1,0 +1,501 @@
+{
+  "item": [
+    {
+      "id": "3a74a3b1-b8f2-4f78-bb49-be969a124bbe",
+      "name": "REST",
+      "description": {
+        "content": "DSpace 7.6 HAL+JSON REST API",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ac26b448-28be-4289-b703-f06ea7339d23",
+          "name": "REST API root / HAL entry point",
+          "request": {
+            "name": "REST API root / HAL entry point",
+            "description": {
+              "content": "Returns the DSpace REST root document with version and HAL _links to all endpoints.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "server",
+                "api"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/hal+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "784c1195-ce19-4fdc-9c9e-518aad0d7fc5",
+              "name": "Root document",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "server",
+                    "api"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/hal+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/hal+json"
+                }
+              ],
+              "body": "{\n  \"dspaceUI\": \"http://SqUDII.gmruzVs2Na,uRjZ\",\n  \"dspaceName\": \"string\",\n  \"dspaceServer\": \"http://MMxbermRbeftKRWhPoAUvcAKm.wlaYNqi,eXupl.LyPNN.W5EaqEIP\",\n  \"dspaceVersion\": \"DSpace 7.6\",\n  \"type\": \"root\",\n  \"_links\": {\n    \"key_0\": {\n      \"href\": \"http://iFnyrzaJsRCrJWUBOCLk.aeijlRahSGv7QUuQfa99dpzhX64t4ATRidNa1nHIf,VaRP\"\n    },\n    \"key_1\": {\n      \"href\": \"http://zkgbRNzACTZvcPgXfmjBvvAVLFibgsK.tfjKJnh3wVynkN3we+2nFmJh\"\n    },\n    \"key_2\": {\n      \"href\": \"https://ZzwhIbQDIUnfMQavPVzSxM.liK9MynYS7k9rzkId7xmESkkqkYkl3yGokfP-ETpZ6gq3qmDiOVgIQ8tgeIzCo\"\n    },\n    \"key_3\": {\n      \"href\": \"https://vNoYfeaXlj.sxzAXrN.EQ34ARbGbqHBLpmYk.9vVRgGHeXwnpqJvK+tE+tvqBK6hUiK\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1969f6e3-b8fc-4005-97c9-b1be9a9c5f7e",
+          "name": "List top-level and all communities",
+          "request": {
+            "name": "List top-level and all communities",
+            "description": {},
+            "url": {
+              "path": [
+                "server",
+                "api",
+                "core",
+                "communities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "20"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/hal+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ed159cef-e72d-4e50-b3d5-e2a17d46adc3",
+              "name": "Paginated list of communities",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "server",
+                    "api",
+                    "core",
+                    "communities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/hal+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/hal+json"
+                }
+              ],
+              "body": "{\n  \"_embedded\": {\n    \"communities\": [\n      {\n        \"id\": \"972fe760-a63a-a7dc-81b0-34601238c2b7\",\n        \"uuid\": \"1c9eadca-1421-731f-4418-767dab326a24\",\n        \"name\": \"string\",\n        \"handle\": \"2433/36038\",\n        \"metadata\": {\n          \"key_0\": [\n            {\n              \"value\": \"string\",\n              \"language\": \"string\",\n              \"authority\": \"string\",\n              \"confidence\": 5628,\n              \"place\": 6811\n            },\n            {\n              \"value\": \"string\",\n              \"language\": \"string\",\n              \"authority\": \"string\",\n              \"confidence\": 5713,\n              \"place\": 503\n            }\n          ],\n          \"key_1\": [\n            {\n              \"value\": \"string\",\n              \"language\": \"string\",\n              \"authority\": \"string\",\n              \"confidence\": 1817,\n              \"place\": 7829\n            },\n            {\n              \"value\": \"string\",\n              \"language\": \"string\",\n              \"authority\": \"string\",\n              \"confidence\": 9850,\n              \"place\": 6538\n            }\n          ],\n          \"key_2\": [\n            {\n              \"value\": \"string\",\n              \"language\": \"string\",\n              \"authority\": \"string\",\n              \"confidence\": 2064,\n              \"place\": 9510\n            },\n            {\n              \"value\": \"string\",\n              \"language\": \"string\",\n              \"authority\": \"string\",\n              \"confidence\": 3692,\n              \"place\": 677\n            }\n          ]\n        },\n        \"archivedItemsCount\": 7347,\n        \"isBulletin\": false,\n        \"type\": \"community\",\n        \"_links\": {\n          \"key_0\": {\n            \"href\": \"http://KjnNhATomxMbavyi.hwbG\"\n          },\n          \"key_1\": {\n            \"href\": \"http://aVIGMkhOWLseKw.egyTIuwgSvEwBiXK+AZSu+zQL7\"\n          }\n        }\n      },\n      {\n        \"id\": \"bc72664d-1207-29af-90ae-41aa5bba48fc\",\n        \"uuid\": \"2e6fd5b8-6e5a-67cf-0d29-8bcb8a80cea0\",\n        \"name\": \"string\",\n        \"handle\": \"2433/36038\",\n        \"metadata\": {\n          \"key_0\": [\n            {\n              \"value\": \"string\",\n              \"language\": \"string\",\n              \"authority\": \"string\",\n              \"confidence\": 5260,\n              \"place\": 4465\n            },\n            {\n              \"value\": \"string\",\n              \"language\": \"string\",\n              \"authority\": \"string\",\n              \"confidence\": 3568,\n              \"place\": 8603\n            }\n          ]\n        },\n        \"archivedItemsCount\": 3859,\n        \"isBulletin\": true,\n        \"type\": \"community\",\n        \"_links\": {\n          \"key_0\": {\n            \"href\": \"https://g.zgysVNPMeCaA6jBcVryXjW3atH1\"\n          },\n          \"key_1\": {\n            \"href\": \"http://LdnSqsC.tnzkW+njKrHumWkKNSMk0JwyDNi.gCLvvhhNS3Q7-J\"\n          },\n          \"key_2\": {\n            \"href\": \"https://GYhEovMyvO.oyv\"\n          }\n        }\n      }\n    ]\n  },\n  \"page\": {\n    \"size\": 2933,\n    \"totalElements\": 8838,\n    \"totalPages\": 3315,\n    \"number\": 1037\n  },\n  \"_links\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "577177ce-a8d9-4a9b-bc4e-c2e43c3ff62b",
+          "name": "Retrieve a single community by UUID",
+          "request": {
+            "name": "Retrieve a single community by UUID",
+            "description": {},
+            "url": {
+              "path": [
+                "server",
+                "api",
+                "core",
+                "communities",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uuid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/hal+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "57772cfb-221a-493d-9711-74355baa9e09",
+              "name": "A community",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "server",
+                    "api",
+                    "core",
+                    "communities",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/hal+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/hal+json"
+                }
+              ],
+              "body": "{\n  \"id\": \"612e2268-2958-a77c-d85e-2b9c1512bb53\",\n  \"uuid\": \"da8cf164-3ca7-e9b8-8cc6-5a57b530f228\",\n  \"name\": \"string\",\n  \"handle\": \"2433/36038\",\n  \"metadata\": {\n    \"key_0\": [\n      {\n        \"value\": \"string\",\n        \"language\": \"string\",\n        \"authority\": \"string\",\n        \"confidence\": 8277,\n        \"place\": 9846\n      },\n      {\n        \"value\": \"string\",\n        \"language\": \"string\",\n        \"authority\": \"string\",\n        \"confidence\": 6613,\n        \"place\": 909\n      }\n    ],\n    \"key_1\": [\n      {\n        \"value\": \"string\",\n        \"language\": \"string\",\n        \"authority\": \"string\",\n        \"confidence\": 4621,\n        \"place\": 4279\n      },\n      {\n        \"value\": \"string\",\n        \"language\": \"string\",\n        \"authority\": \"string\",\n        \"confidence\": 1898,\n        \"place\": 5173\n      }\n    ]\n  },\n  \"archivedItemsCount\": 74,\n  \"isBulletin\": true,\n  \"type\": \"community\",\n  \"_links\": {\n    \"key_0\": {\n      \"href\": \"http://nnzTfqteUdwwKjvRVRCQK.gbqro,N4sGXGZNYtPWeKEUuCvey4IfGo8ULdI.krZw.+KwmbVR7,xxyGezvviNHZkexpPN\"\n    },\n    \"key_1\": {\n      \"href\": \"https://YgSbYKgGgshZCeTlMiJAnLpthTKi.rcyvq.KYSXIY0y4acNhHSJY62\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "72fea193-34d0-49c0-a0b0-2d450862f423",
+              "name": "Error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "server",
+                    "api",
+                    "core",
+                    "communities",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2005-06-08T08:37:23.689Z\",\n  \"status\": 611,\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"path\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "05dbc990-1ad6-4b14-8b60-fa58491e7f72",
+          "name": "List collections",
+          "request": {
+            "name": "List collections",
+            "description": {},
+            "url": {
+              "path": [
+                "server",
+                "api",
+                "core",
+                "collections"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "20"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/hal+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "01fffbab-16e2-4766-ad04-8eebe3b40c4d",
+              "name": "Paginated list of collections",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "server",
+                    "api",
+                    "core",
+                    "collections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/hal+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/hal+json"
+                }
+              ],
+              "body": "{\n  \"_embedded\": {\n    \"collections\": [\n      {\n        \"id\": \"e2e2fb88-bcd9-9429-045d-c064aded1b19\",\n        \"uuid\": \"3ed874c3-335a-8d9f-6f9d-41d82d7e24ae\",\n        \"name\": \"string\",\n        \"handle\": \"2433/126120\",\n        \"archivedItemsCount\": 6380,\n        \"type\": \"collection\"\n      },\n      {\n        \"id\": \"1f66aa9d-cbf2-4b3c-aae2-438566fdcab1\",\n        \"uuid\": \"690d88f2-11fc-74e3-9dd6-955b861bde13\",\n        \"name\": \"string\",\n        \"handle\": \"2433/126120\",\n        \"archivedItemsCount\": 2375,\n        \"type\": \"collection\"\n      }\n    ]\n  },\n  \"page\": {\n    \"size\": 5133,\n    \"totalElements\": 3124,\n    \"totalPages\": 7637,\n    \"number\": 1443\n  },\n  \"_links\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6a1e0801-c10c-4514-a610-d2d858406baf",
+          "name": "List items (authentication required)",
+          "request": {
+            "name": "List items (authentication required)",
+            "description": {},
+            "url": {
+              "path": [
+                "server",
+                "api",
+                "core",
+                "items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5ff7b815-eb85-4d37-a6ae-685f2faaac24",
+              "name": "Error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "server",
+                    "api",
+                    "core",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2005-06-08T08:37:23.689Z\",\n  \"status\": 611,\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"path\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://repository.kulib.kyoto-u.ac.jp",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "671842b9-7b25-43eb-93a5-76bb96365673",
+    "name": "KURENAI Repository API (DSpace 7.6 + ) OAI-PMH REST API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Machine-readable interfaces for the Kyoto University Research Information Repository (KURENAI), a DSpace 7.6 instance. Two confirmed-live surfaces are described: the DSpace REST API (HAL+JSON) rooted at /server/api, and the OAI-PMH 2.0 metadata harvesting endpoint at /server/oai/request. Only paths and shapes verified against the live system are included. Item-level REST endpoints require authentication; the public surfaces (root, communities, collections, OAI-PMH) are anonymous.\n\nContact Support:\n Name: KURENAI Repository Administration\n Email: repository@mail2.adm.kyoto-u.ac.jp",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "KURENAI Repository API (DSpace 7.6 + ) OAI-PMH REST API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "REST",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "REST API root / HAL entry point",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://repository.kulib.kyoto-u.ac.jp/server/api"
+          },
+          "docs": "Returns the DSpace REST root document with version and HAL _links to all endpoints."
+        },
+        {
+          "info": {
+            "name": "List top-level and all communities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://repository.kulib.kyoto-u.ac.jp/server/api/core/communities",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List top-level and all communities"
+        },
+        {
+          "info": {
+            "name": "Retrieve a single community by UUID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://repository.kulib.kyoto-u.ac.jp/server/api/core/communities/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a single community by UUID"
+        },
+        {
+          "info": {
+            "name": "List collections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://repository.kulib.kyoto-u.ac.jp/server/api/core/collections",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List collections"
+        },
+        {
+          "info": {
+            "name": "List items (authentication required)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://repository.kulib.kyoto-u.ac.jp/server/api/core/items"
+          },
+          "docs": "List items (authentication required)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "KURENAI Repository API (DSpace 7.6 REST + ) OAI-PMH API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OAI-PMH",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "OAI-PMH 2.0 request endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://repository.kulib.kyoto-u.ac.jp/server/oai/request",
+            "params": [
+              {
+                "name": "verb",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "metadataPrefix",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "set",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resumptionToken",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Single OAI-PMH 2.0 endpoint. The verb parameter selects the operation. Responses are OAI-PMH XML. Supported metadata prefixes include oai_dc, jpcoar_2.0, and didl."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
