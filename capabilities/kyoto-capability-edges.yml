@@ -1,0 +1,46 @@
+slug: kyoto
+provider: Kyoto University
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Education
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: LMS
+  spec_file: kyoto-lms-api-openapi.yml
+  capability_id: BC-4730.30
+  capability_id_l1: BC-4730
+  capability_name: Learning Environment Management
+  confidence: 0.85
+  evidence: PandA ... the Kyoto University Learning Support System ... a Sakai deployment; GET /direct/assignment.json  List
+    assignments visible to the caller; GET /direct/syllabus.json
+  reason: Operations expose a running learning-management system (sites, syllabus, announcements, assignments,
+    content, LTI tool registrations), which is operation of the learning environment platform.
+- tag: OAI-PMH
+  spec_file: kyoto-oai-pmh-api-openapi.yml
+  capability_id: BC-4780.40
+  capability_id_l1: BC-4780
+  capability_name: Scholarly Output & Publication Management
+  confidence: 0.7
+  evidence: the OAI-PMH 2.0 metadata harvesting endpoint at /server/oai/request ... Kyoto University Research
+    Information Repository (KURENAI)
+  reason: Metadata harvesting endpoint for the institutional research repository — stewardship and dissemination
+    of scholarly output metadata. Could arguably be library information-resource operations, hence 0.7.
+- tag: REST
+  spec_file: kyoto-rest-api-openapi.yml
+  capability_id: BC-4780.40
+  capability_id_l1: BC-4780
+  capability_name: Scholarly Output & Publication Management
+  confidence: 0.7
+  evidence: GET /server/api/core/communities  List top-level and all communities; Kyoto University Research
+    Information Repository (KURENAI), a DSpace 7.6 instance
+  reason: DSpace REST surface listing communities, collections and items of the institutional research
+    repository — tracking and stewardship of scholarly output. Some ambiguity with library/information
+    resource operations.

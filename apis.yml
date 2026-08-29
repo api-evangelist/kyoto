@@ -213,6 +213,9 @@ apis:
   - type: Metadata
     url: authentication/kyoto-saml-idp-metadata.xml
 common:
+  - type: CapabilityMap
+    url: capabilities/kyoto-capability-edges.yml
+    name: Kyoto University Business Capability Map
   - type: Website
     url: https://www.kyoto-u.ac.jp/en
   - type: ResearchRepository
