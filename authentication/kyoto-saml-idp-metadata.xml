@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" ID="PI0005JP" entityID="https://authidp1.iimc.kyoto-u.ac.jp/idp/shibboleth">
+  <IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:1.1:protocol urn:mace:shibboleth:1.0 urn:oasis:names:tc:SAML:2.0:protocol">
+    <Extensions>
+      <shibmd:Scope xmlns:shibmd="urn:mace:shibboleth:metadata:1.0" regexp="false">kyoto-u.ac.jp</shibmd:Scope>
+      <mdui:UIInfo xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui">
+        <mdui:DisplayName xml:lang="ja">京都大学</mdui:DisplayName>
+        <mdui:DisplayName xml:lang="en">Kyoto University</mdui:DisplayName>
+        <mdui:Keywords xml:lang="en">category:location:kinki category:organizationType:university</mdui:Keywords>
+      </mdui:UIInfo>
+      <mdui:DiscoHints xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui">
+        <mdui:IPHint>130.54.0.0/16</mdui:IPHint>
+        <mdui:IPHint>133.3.0.0/16</mdui:IPHint>
+        <mdui:DomainHint>kyoto-u.ac.jp</mdui:DomainHint>
+      </mdui:DiscoHints>
+    </Extensions>
+    <KeyDescriptor>
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:X509Data>
+          <ds:X509Certificate>MIIDYzCCAksCFFCHoJdaNMVqWClQBlsGjqR34/ZlMA0GCSqGSIb3DQEBCwUAMG4x
+CzAJBgNVBAYTAkpQMQ4wDAYDVQQIDAVLeW90bzEOMAwGA1UEBwwFTG9jYWwxGTAX
+BgNVBAoMEEt5b3RvIFVuaXZlcnNpdHkxJDAiBgNVBAMMG2F1dGhpZHAxLmlpbWMu
+a3lvdG8tdS5hYy5qcDAeFw0yNTAyMDMwOTExNThaFw0yODEwMDEwOTExNThaMG4x
+CzAJBgNVBAYTAkpQMQ4wDAYDVQQIDAVLeW90bzEOMAwGA1UEBwwFTG9jYWwxGTAX
+BgNVBAoMEEt5b3RvIFVuaXZlcnNpdHkxJDAiBgNVBAMMG2F1dGhpZHAxLmlpbWMu
+a3lvdG8tdS5hYy5qcDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJ6u
+xlpWrrGQu3Ylv/izTyhJTYhXaWFPeyd5dG6fyT6LkTyyvHPFLUrw/mTISciIIaW6
+WX0BiqEOEtsfjPPfnBwnBdDOAxSx4tOueM9rGkgiwbgrfsLQs9wprKXBgH+8hXi4
+RXrRJ8pJ8eYgvo9jf1qxBtmCmd/BBmvd2k8QEpYg8s94FxCpSJHuYzh7TiKdCifZ
+Nvc60UI+bm3ESudTlm5e/LjKxBNj5wCyQlDdBWAoI6yLQd5YgyexF77dDu2BmuLD
+U9TXm4Y9OghmI8UTDwy63gV+gO8E/HeN4rE40Y+hOguY004pLH/76asJaXaT4bvC
+ljlmwYExk2gks9fWiAMCAwEAATANBgkqhkiG9w0BAQsFAAOCAQEAkNXOuneqBvSC
++iNwpKlU8gsZxyIytvUavgnmHRG09tkJlW5uQSscYT2PY2Y587kqGPuhcLFMkkUL
+QxuxtWYpqIM8oKSUoc4HKqphJPJKGOhJER5/WbuRiIdHi8XfT7+ZxtJuwqqxU5To
+OBQC8aSb8BeoCUwSA/yhwgdtzlOGnvYb4BQZlKJF/6ELOm/GgL6CJO+HHeFvUmEA
+TDBKVB5xjfUD/gyAGYTh4lqWYeYMN35sn7DUXm8Kca35jXsnpKf9qNk98EUsE4n6
+TGM970N3znhAKbAAx8ICmSrbSlzrrw0hi+pxRA5Vo/2bkASMDCWPRV6fXy9dkO+9
+E9YnvHEnaA==</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </KeyDescriptor>
+    <NameIDFormat>urn:mace:shibboleth:1.0:nameIdentifier</NameIDFormat>
+    <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+    <SingleSignOnService Binding="urn:mace:shibboleth:1.0:profiles:AuthnRequest" Location="https://authidp1.iimc.kyoto-u.ac.jp/idp/profile/Shibboleth/SSO"/>
+    <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://authidp1.iimc.kyoto-u.ac.jp/idp/profile/SAML2/POST/SSO"/>
+    <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://authidp1.iimc.kyoto-u.ac.jp/idp/profile/SAML2/Redirect/SSO"/>
+  </IDPSSODescriptor>
+  <AttributeAuthorityDescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:2.0:protocol">
+    <Extensions>
+      <shibmd:Scope xmlns:shibmd="urn:mace:shibboleth:metadata:1.0" regexp="false">kyoto-u.ac.jp</shibmd:Scope>
+    </Extensions>
+    <KeyDescriptor>
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:X509Data>
+          <ds:X509Certificate>MIIDYzCCAksCFFCHoJdaNMVqWClQBlsGjqR34/ZlMA0GCSqGSIb3DQEBCwUAMG4x
+CzAJBgNVBAYTAkpQMQ4wDAYDVQQIDAVLeW90bzEOMAwGA1UEBwwFTG9jYWwxGTAX
+BgNVBAoMEEt5b3RvIFVuaXZlcnNpdHkxJDAiBgNVBAMMG2F1dGhpZHAxLmlpbWMu
+a3lvdG8tdS5hYy5qcDAeFw0yNTAyMDMwOTExNThaFw0yODEwMDEwOTExNThaMG4x
+CzAJBgNVBAYTAkpQMQ4wDAYDVQQIDAVLeW90bzEOMAwGA1UEBwwFTG9jYWwxGTAX
+BgNVBAoMEEt5b3RvIFVuaXZlcnNpdHkxJDAiBgNVBAMMG2F1dGhpZHAxLmlpbWMu
+a3lvdG8tdS5hYy5qcDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJ6u
+xlpWrrGQu3Ylv/izTyhJTYhXaWFPeyd5dG6fyT6LkTyyvHPFLUrw/mTISciIIaW6
+WX0BiqEOEtsfjPPfnBwnBdDOAxSx4tOueM9rGkgiwbgrfsLQs9wprKXBgH+8hXi4
+RXrRJ8pJ8eYgvo9jf1qxBtmCmd/BBmvd2k8QEpYg8s94FxCpSJHuYzh7TiKdCifZ
+Nvc60UI+bm3ESudTlm5e/LjKxBNj5wCyQlDdBWAoI6yLQd5YgyexF77dDu2BmuLD
+U9TXm4Y9OghmI8UTDwy63gV+gO8E/HeN4rE40Y+hOguY004pLH/76asJaXaT4bvC
+ljlmwYExk2gks9fWiAMCAwEAATANBgkqhkiG9w0BAQsFAAOCAQEAkNXOuneqBvSC
++iNwpKlU8gsZxyIytvUavgnmHRG09tkJlW5uQSscYT2PY2Y587kqGPuhcLFMkkUL
+QxuxtWYpqIM8oKSUoc4HKqphJPJKGOhJER5/WbuRiIdHi8XfT7+ZxtJuwqqxU5To
+OBQC8aSb8BeoCUwSA/yhwgdtzlOGnvYb4BQZlKJF/6ELOm/GgL6CJO+HHeFvUmEA
+TDBKVB5xjfUD/gyAGYTh4lqWYeYMN35sn7DUXm8Kca35jXsnpKf9qNk98EUsE4n6
+TGM970N3znhAKbAAx8ICmSrbSlzrrw0hi+pxRA5Vo/2bkASMDCWPRV6fXy9dkO+9
+E9YnvHEnaA==</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </KeyDescriptor>
+    <AttributeService Binding="urn:oasis:names:tc:SAML:1.0:bindings:SOAP-binding" Location="https://authidp1.iimc.kyoto-u.ac.jp:8443/idp/profile/SAML1/SOAP/AttributeQuery"/>
+    <AttributeService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://authidp1.iimc.kyoto-u.ac.jp:8443/idp/profile/SAML2/SOAP/AttributeQuery"/>
+    <NameIDFormat>urn:mace:shibboleth:1.0:nameIdentifier</NameIDFormat>
+    <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+  </AttributeAuthorityDescriptor>
+  <Organization>
+    <OrganizationName xml:lang="en">Kyoto University</OrganizationName>
+    <OrganizationName xml:lang="ja">京都大学</OrganizationName>
+    <OrganizationDisplayName xml:lang="en">Kyoto University</OrganizationDisplayName>
+    <OrganizationDisplayName xml:lang="ja">京都大学</OrganizationDisplayName>
+    <OrganizationURL xml:lang="en">http://www.iimc.kyoto-u.ac.jp/</OrganizationURL>
+  </Organization>
+  <ContactPerson contactType="technical">
+    <GivenName>ICT Support Center</GivenName>
+    <SurName>Institute for Information Management and Communication</SurName>
+    <EmailAddress>mailto:authidp@iimc.kyoto-u.ac.jp</EmailAddress>
+  </ContactPerson>
+</EntityDescriptor>

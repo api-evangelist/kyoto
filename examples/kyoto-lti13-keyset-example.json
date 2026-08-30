@@ -1,0 +1,41 @@
+{
+  "provenance": {
+    "generated": "2026-08-19",
+    "method": "probed",
+    "source": "live GET https://panda.ecs.kyoto-u.ac.jp/imsblis/lti13/keyset on 2026-08-19 (HTTP 200, application/json)",
+    "operator": "institution",
+    "notes": "RSA moduli truncated to 40 characters; the live keyset serves three full RS256 signing keys."
+  },
+  "request": {
+    "method": "GET",
+    "url": "https://panda.ecs.kyoto-u.ac.jp/imsblis/lti13/keyset"
+  },
+  "response": {
+    "keys": [
+      {
+        "kty": "RSA",
+        "e": "AQAB",
+        "use": "sig",
+        "kid": "-465055888",
+        "alg": "RS256",
+        "n": "rDVJOhoKHp3gPecJRhIXQa5qRO6ruSwp2_CLGfEu...truncated"
+      },
+      {
+        "kty": "RSA",
+        "e": "AQAB",
+        "use": "sig",
+        "kid": "-833035628",
+        "alg": "RS256",
+        "n": "mWqtTw1Zoa8DVX4ZguqpzMxoKg8FLTiwYj29m6wH...truncated"
+      },
+      {
+        "kty": "RSA",
+        "e": "AQAB",
+        "use": "sig",
+        "kid": "496849529",
+        "alg": "RS256",
+        "n": "jR7r0gqzznov1guk-lGeGF8hH_oTlw6dT4BKzeNR...truncated"
+      }
+    ]
+  }
+}

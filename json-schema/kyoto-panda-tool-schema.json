@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://panda.ecs.kyoto-u.ac.jp/schemas/tool.json",
+  "title": "PandA Tool",
+  "description": "A tool registered in PandA, the Kyoto University Learning Support System (Sakai), as returned by /direct/tool.json. Derived from the live response of 2026-08-19, which listed 96 registered tools.",
+  "x-provenance": {
+    "generated": "2026-08-19",
+    "method": "derived",
+    "source": "https://panda.ecs.kyoto-u.ac.jp/direct/tool.json (HTTP 200, application/json, 96 tools, probed 2026-08-19)",
+    "operator": "institution",
+    "notes": "Derived by API Evangelist from the live response shape. Kyoto University publishes no schema for this surface."
+  },
+  "type": "object",
+  "required": ["id", "title"],
+  "properties": {
+    "id": { "type": "string", "examples": ["sakai-site-group-manager"] },
+    "title": { "type": "string", "examples": ["Group Manager Helper"] },
+    "description": { "type": ["string", "null"], "examples": ["Site Group Manager Helper Tool"] },
+    "access": { "type": ["string", "null"], "examples": ["portal"] },
+    "categories": { "type": "array", "items": { "type": "string" }, "examples": [["sakai.helper"]] },
+    "keywords": { "type": "array", "items": { "type": "string" } },
+    "home": { "type": ["string", "null"] },
+    "finalConfig": { "type": "object", "additionalProperties": true },
+    "mutableConfig": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Sakai permission requirements for the tool, e.g. {\"functions.require\": \"site.upd\"}."
+    },
+    "registeredConfig": { "type": "object", "additionalProperties": true },
+    "entityId": { "type": "string" },
+    "entityReference": { "type": "string", "examples": ["/tool/sakai-site-group-manager"] },
+    "entityURL": { "type": "string", "format": "uri" },
+    "entityTitle": { "type": "string" }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,55 @@
+generated: '2026-08-19'
+method: probed
+source: >-
+  Live probes on 2026-08-19 of every Kyoto University-operated surface in this profile, plus a read
+  of openapi/kyoto-lms-api-openapi.yml, openapi/kyoto-rest-api-openapi.yml and
+  openapi/kyoto-oai-pmh-api-openapi.yml.
+provider: Kyoto University
+providerId: kyoto
+state: none_published
+description: >-
+  Kyoto University publishes no OAuth 2.0 authorization server, no consent screen, no scope
+  vocabulary and no developer registration for any surface it operates. This file records that
+  absence explicitly rather than leaving the artifact missing, and records the two authorization
+  vocabularies that do exist on its surfaces so neither is mistaken for a published scope model.
+oauth2:
+  authorization_server: none_found
+  token_endpoint: none_found
+  scopes: []
+  detail: >-
+    No .well-known/oauth-authorization-server or .well-known/openid-configuration was found on any
+    Kyoto University-operated host. The PandA LTI 1.3 handler exposes a token path
+    (/imsblis/lti13/token) but it answers 400 to a GET
+    ({"error":"Unrecognized GET request parts=4 ..."}), and LTI Advantage token issuance is a
+    platform-to-tool exchange for registered tools, not a public developer OAuth surface. No scopes
+    are advertised anywhere on it, so none are recorded.
+authorization_vocabularies_observed:
+- name: Sakai tool functions
+  surface: https://panda.ecs.kyoto-u.ac.jp/direct/tool.json
+  operator: institution
+  machine_readable: true
+  detail: >-
+    The PandA tool registry publishes each tool's required permission in a `functions.require` field
+    (for example "site.upd" on the Site Group Manager Helper). This is Sakai's internal permission
+    vocabulary, readable by anyone, and it is the closest thing to a published authorization model on
+    any Kyoto surface. It is NOT an OAuth scope vocabulary and must not be scored as one: it governs
+    in-application permissions for authenticated university accounts.
+  evidence:
+    url: https://panda.ecs.kyoto-u.ac.jp/direct/tool.json
+    status: 200
+- name: SAML attribute release
+  surface: https://authidp1.iimc.kyoto-u.ac.jp/idp/shibboleth
+  operator: institution
+  machine_readable: true
+  detail: >-
+    Authorization to Kyoto University services is expressed as SAML attribute release from the IIMC
+    Shibboleth IdP to federation service providers, governed by GakuNin policy and, per the IIMC,
+    by committee approval for each new service-provider connection. Attribute release is the real
+    access-control vocabulary in a university federation, but it is negotiated per relying party
+    rather than published as a self-service scope list.
+  evidence:
+    url: https://authidp1.iimc.kyoto-u.ac.jp/idp/shibboleth
+    status: 200
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://panda.ecs.kyoto-u.ac.jp/schemas/entity-collection.json",
+  "title": "PandA Entity Broker Collection",
+  "description": "The generic Sakai Entity Broker envelope returned by every /direct/<prefix>.json endpoint on PandA, the Kyoto University Learning Support System. The response carries the prefix that produced it plus a single array property named \"<prefix>_collection\".",
+  "x-provenance": {
+    "generated": "2026-08-19",
+    "method": "derived",
+    "source": "Live anonymous GETs on 2026-08-19 of /direct/{site,syllabus,announcement,calendar,content,assignment,lti,portal,wiki,tagservice,session,tool}.json",
+    "operator": "institution",
+    "notes": "Derived by API Evangelist from observed responses. Kyoto University publishes no schema for this surface."
+  },
+  "type": "object",
+  "required": ["entityPrefix"],
+  "properties": {
+    "entityPrefix": {
+      "type": "string",
+      "description": "The registered entity prefix that produced this response.",
+      "examples": ["site", "tool", "syllabus", "session"]
+    }
+  },
+  "patternProperties": {
+    "^[a-zA-Z0-9_-]+_collection$": {
+      "type": "array",
+      "description": "The collection of entities for this prefix. Empty for an anonymous caller on session-scoped prefixes.",
+      "items": { "type": "object" }
+    }
+  },
+  "additionalProperties": true
+}

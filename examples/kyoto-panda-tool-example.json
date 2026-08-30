@@ -1,0 +1,134 @@
+{
+  "provenance": {
+    "generated": "2026-08-19",
+    "method": "probed",
+    "source": "live GET https://panda.ecs.kyoto-u.ac.jp/direct/tool.json on 2026-08-19 (HTTP 200, application/json, 96 tools)",
+    "operator": "institution",
+    "notes": "Truncated to the first 5 of 96 registered tools. No credential was sent."
+  },
+  "request": {
+    "method": "GET",
+    "url": "https://panda.ecs.kyoto-u.ac.jp/direct/tool.json"
+  },
+  "response": {
+    "entityPrefix": "tool",
+    "tool_collection": [
+      {
+        "access": "portal",
+        "categories": [
+          "sakai.helper"
+        ],
+        "description": "Site Group Manager Helper Tool",
+        "finalConfig": {},
+        "home": null,
+        "id": "sakai-site-group-manager",
+        "keywords": [],
+        "mutableConfig": {
+          "functions.require": "site.upd"
+        },
+        "registeredConfig": {
+          "functions.require": "site.upd"
+        },
+        "title": "Group Manager Helper",
+        "entityReference": "/tool/sakai-site-group-manager",
+        "entityURL": "https://panda.ecs.kyoto-u.ac.jp/direct/tool/sakai-site-group-manager",
+        "entityId": "sakai-site-group-manager",
+        "entityTitle": "Group Manager Helper"
+      },
+      {
+        "access": "portal",
+        "categories": [
+          "sakai.helper"
+        ],
+        "description": "For setting parent/child links between sites.",
+        "finalConfig": {},
+        "home": null,
+        "id": "sakai-site-manage-link-helper",
+        "keywords": [],
+        "mutableConfig": {
+          "source": "",
+          "reset.button": "true",
+          "functions.require": "",
+          "height": "600px"
+        },
+        "registeredConfig": {
+          "source": "",
+          "reset.button": "true",
+          "functions.require": "",
+          "height": "600px"
+        },
+        "title": "Site Link Helper",
+        "entityReference": "/tool/sakai-site-manage-link-helper",
+        "entityURL": "https://panda.ecs.kyoto-u.ac.jp/direct/tool/sakai-site-manage-link-helper",
+        "entityId": "sakai-site-manage-link-helper",
+        "entityTitle": "Site Link Helper"
+      },
+      {
+        "access": "portal",
+        "categories": [
+          "sakai.helper"
+        ],
+        "description": "Site Add Participant Helper",
+        "finalConfig": {},
+        "home": null,
+        "id": "sakai-site-manage-participant-helper",
+        "keywords": [],
+        "mutableConfig": {
+          "functions.require": "site.upd"
+        },
+        "registeredConfig": {
+          "functions.require": "site.upd"
+        },
+        "title": "Site Add Participants Helper",
+        "entityReference": "/tool/sakai-site-manage-participant-helper",
+        "entityURL": "https://panda.ecs.kyoto-u.ac.jp/direct/tool/sakai-site-manage-participant-helper",
+        "entityId": "sakai-site-manage-participant-helper",
+        "entityTitle": "Site Add Participants Helper"
+      },
+      {
+        "access": "portal",
+        "categories": [
+          "sakai.helper"
+        ],
+        "description": "Site Page Order Helper Tool",
+        "finalConfig": {},
+        "home": null,
+        "id": "sakai-site-pageorder-helper",
+        "keywords": [],
+        "mutableConfig": {
+          "functions.require": "site.upd"
+        },
+        "registeredConfig": {
+          "functions.require": "site.upd"
+        },
+        "title": "Page Order Helper",
+        "entityReference": "/tool/sakai-site-pageorder-helper",
+        "entityURL": "https://panda.ecs.kyoto-u.ac.jp/direct/tool/sakai-site-pageorder-helper",
+        "entityId": "sakai-site-pageorder-helper",
+        "entityTitle": "Page Order Helper"
+      },
+      {
+        "access": "portal",
+        "categories": [
+          "sakai.admin"
+        ],
+        "description": "Add or edit academic terms",
+        "finalConfig": {},
+        "home": null,
+        "id": "sakai.acadtermmanage",
+        "keywords": [],
+        "mutableConfig": {},
+        "registeredConfig": {},
+        "title": "Academic Term Manager",
+        "entityReference": "/tool/sakai.acadtermmanage",
+        "entityURL": "https://panda.ecs.kyoto-u.ac.jp/direct/tool/sakai.acadtermmanage",
+        "entityId": "sakai.acadtermmanage",
+        "entityTitle": "Academic Term Manager"
+      }
+    ],
+    "x-truncated": {
+      "returned_in_example": 5,
+      "returned_live": 96
+    }
+  }
+}

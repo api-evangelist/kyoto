@@ -1,0 +1,36 @@
+{
+  "provenance": {
+    "generated": "2026-08-19",
+    "method": "probed",
+    "source": "live GET https://panda.ecs.kyoto-u.ac.jp/direct/session.json on 2026-08-19 (HTTP 200, application/json)",
+    "operator": "institution",
+    "notes": "Anonymous call. Sakai returns a session envelope with null id/userId/userEid - no identity is disclosed without credentials."
+  },
+  "request": {
+    "method": "GET",
+    "url": "https://panda.ecs.kyoto-u.ac.jp/direct/session.json"
+  },
+  "response": {
+    "entityPrefix": "session",
+    "session_collection": [
+      {
+        "attributeNames": {
+          "iterator": {
+            "locked": false
+          }
+        },
+        "attributes": null,
+        "creationTime": 1787176705351,
+        "currentTime": 1787176705352,
+        "id": null,
+        "lastAccessedTime": 1787176705351,
+        "maxInactiveInterval": 7200,
+        "userEid": null,
+        "userId": null,
+        "active": true,
+        "entityReference": "/session",
+        "entityURL": "https://panda.ecs.kyoto-u.ac.jp/direct/session"
+      }
+    ]
+  }
+}
