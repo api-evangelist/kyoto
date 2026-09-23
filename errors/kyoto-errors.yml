@@ -1,0 +1,111 @@
+generated: '2026-08-19'
+method: probed
+source: >-
+  Observed responses from live, anonymous probes of Kyoto University-operated hosts on 2026-08-19.
+  Every entry is a status code an anonymous client actually received; none is inferred from
+  documentation, because none of these surfaces publishes an error reference.
+provider: Kyoto University
+providerId: kyoto
+description: >-
+  Error and boundary behaviour of the machine-readable surfaces Kyoto University operates itself.
+  The university publishes no error catalogue for any of them, so this file is the observed
+  contract: what each surface returns, in what media type, when a call is malformed, unauthorized
+  or absent.
+surfaces:
+- name: PandA (Sakai) Entity Broker
+  operator: institution
+  base_url: https://panda.ecs.kyoto-u.ac.jp
+  media_type_on_error: text/html
+  structured_errors: false
+  notes: >-
+    Errors surface as Apache Tomcat HTML status pages, localised to Japanese, not as JSON. A client
+    that requests application/json still receives HTML on failure, so callers must branch on status
+    code rather than parse a body. The LTI endpoints are the exception and answer JSON.
+  observed:
+  - status: 200
+    url: https://panda.ecs.kyoto-u.ac.jp/direct/site.json
+    detail: Success with an empty collection - the anonymous result for session-scoped entities.
+  - status: 400
+    url: https://panda.ecs.kyoto-u.ac.jp/direct/membership.json
+    detail: 'Tomcat "HTTPステータス 400 – Bad Request" HTML page when required parameters are absent.'
+  - status: 401
+    url: https://panda.ecs.kyoto-u.ac.jp/direct/poll.json
+    detail: 'Tomcat "HTTPステータス 401 – Unauthorized" HTML page - an authenticated Sakai session is required.'
+  - status: 403
+    url: https://panda.ecs.kyoto-u.ac.jp/direct/user.json
+    detail: 'Tomcat "HTTPステータス 403 – Forbidden" HTML page - the user directory is closed to anonymous callers.'
+  - status: 404
+    url: https://panda.ecs.kyoto-u.ac.jp/.well-known/jwks.json
+    detail: 'Tomcat "HTTPステータス 404 – 見つかりません" HTML page. The LTI keyset is not served from the .well-known namespace.'
+  - status: 500
+    url: https://panda.ecs.kyoto-u.ac.jp/imsoidc/lti13/oidc_auth
+    detail: >-
+      Internal Server Error on a bare GET. The OIDC launch endpoint expects a full LTI 1.3 launch and
+      fails hard rather than returning a 400 - the one rough edge found on this surface.
+- name: PandA LTI 1.3 endpoints
+  operator: institution
+  base_url: https://panda.ecs.kyoto-u.ac.jp/imsblis/lti13
+  media_type_on_error: application/json
+  structured_errors: true
+  error_shape: '{"error": "<message>"}'
+  observed:
+  - status: 200
+    url: https://panda.ecs.kyoto-u.ac.jp/imsblis/lti13/keyset
+    detail: JWKS with three RS256 keys.
+  - status: 400
+    url: https://panda.ecs.kyoto-u.ac.jp/imsblis/lti13/token
+    detail: '{"error":"Unrecognized GET request parts=4 request=/imsblis/lti13/token"} - a JSON error body, correctly typed application/json.'
+  - status: 400
+    url: https://panda.ecs.kyoto-u.ac.jp/imsblis/lti13/keys
+    detail: '{"error":"Unrecognized GET request parts=4 request=/imsblis/lti13/keys"} - unknown sub-path under a known handler.'
+- name: PandA LTI 1.1 Basic Outcomes service
+  operator: institution
+  base_url: https://panda.ecs.kyoto-u.ac.jp/imsblis/service/
+  media_type_on_error: application/xml
+  structured_errors: true
+  error_shape: IMS POX <message_response><statusinfo><codemajor>/<description>
+  notes: >-
+    Failure is reported inside a 200 response, as the IMS specification requires: the HTTP status is
+    success and the fault is carried in codemajor. Clients must read the envelope, not the status code.
+  observed:
+  - status: 200
+    url: https://panda.ecs.kyoto-u.ac.jp/imsblis/service/
+    detail: 'codemajor Fail, description "Not a valid service request: lti_message_type:null".'
+- name: KURENAI DSpace REST + OAI-PMH
+  operator: institution
+  base_url: https://repository.kulib.kyoto-u.ac.jp
+  media_type_on_error: text/html
+  structured_errors: false
+  soft_404: true
+  notes: >-
+    KURENAI's Angular front end returns HTTP 200 with the application shell for paths that do not
+    exist. This is a soft-404 and it is a real trap for automated clients: /.well-known/security.txt
+    and /feed/rss_2.0/site both answer 200 while serving the same HTML shell, so neither a security
+    contact nor an RSS feed actually exists. Only the /server/api and /server/oai/request namespaces
+    return meaningful machine-readable content.
+  observed:
+  - status: 200
+    url: https://repository.kulib.kyoto-u.ac.jp/server/api
+    detail: 'Genuine HAL+JSON root, dspaceVersion "DSpace 7.6".'
+  - status: 200
+    url: https://repository.kulib.kyoto-u.ac.jp/.well-known/security.txt
+    detail: SOFT-404 - HTML application shell, not a security.txt. Must not be credited as a security contact.
+  - status: 200
+    url: https://repository.kulib.kyoto-u.ac.jp/feed/rss_2.0/site
+    detail: SOFT-404 - same HTML shell. There is no repository RSS feed.
+- name: Kyoto University Shibboleth IdP
+  operator: institution
+  base_url: https://authidp1.iimc.kyoto-u.ac.jp
+  media_type_on_error: text/html
+  observed:
+  - status: 200
+    url: https://authidp1.iimc.kyoto-u.ac.jp/idp/shibboleth
+    detail: SAML 2.0 EntityDescriptor, application/xml.
+  - status: 400
+    url: https://authidp1.iimc.kyoto-u.ac.jp/idp/profile/SAML2/Redirect/SSO
+    detail: >-
+      Bad Request to a bare GET with no SAMLRequest - the correct rejection for an unsigned,
+      parameterless authentication request. The endpoint is live, not broken.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

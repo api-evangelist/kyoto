@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<message_response>
+  <statusinfo>
+    <codemajor>Fail</codemajor>
+    <description>Not a valid service request: lti_message_type:null</description>
+  </statusinfo>
+</message_response>

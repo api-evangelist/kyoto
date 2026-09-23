@@ -13,6 +13,12 @@ info:
   contact:
     name: KURENAI Repository Administration
     email: repository@mail2.adm.kyoto-u.ac.jp
+  x-provenance:
+    generated: '2026-08-19'
+    method: probed
+    source: >-
+      Written by API Evangelist from live probes of the KURENAI repository on 2026-06-03. Pristine pre-refine copy. Kyoto University publishes no OpenAPI for this surface.
+    operator: institution
 servers:
   - url: https://repository.kulib.kyoto-u.ac.jp
     description: Kyoto University Research Information Repository (KURENAI)

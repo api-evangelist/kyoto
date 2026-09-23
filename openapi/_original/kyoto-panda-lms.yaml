@@ -1,32 +1,62 @@
-openapi: 3.2.0
+openapi: 3.0.3
 info:
-  title: Kyoto University PandA Learning Support System API (Sakai…
-  description: 'Machine-readable interfaces of PandA (Panda: People and Networked Digital Assets), the Kyoto University Learning Support System operated by the Institute for Information Management and Communication (IIMC).'
-  version: 1.0.0
+  title: Kyoto University PandA Learning Support System API (Sakai Entity Broker + IMS LTI)
+  description: >-
+    Machine-readable interfaces of PandA (Panda: People and Networked Digital Assets), the Kyoto
+    University Learning Support System operated by the Institute for Information Management and
+    Communication (IIMC). PandA is a Sakai deployment running on Kyoto University's own host
+    panda.ecs.kyoto-u.ac.jp, linked from the IIMC's own education service page.
+
+    Two anonymous, machine-readable surfaces are described, and only paths and shapes verified
+    live against the running system on 2026-08-19 are included:
+
+    1. The Sakai Entity Broker REST layer under /direct, which self-describes at /direct/describe
+       (53 entity prefixes registered) and answers `application/json` on the public prefixes with
+       no credential. Anonymous callers receive an empty collection for user-scoped entities; the
+       tool registry is fully public and returned 96 registered tools.
+    2. The IMS/1EdTech LTI endpoints — an LTI 1.3 (LTI Advantage) platform JWKS at
+       /imsblis/lti13/keyset serving three RS256 signing keys, and the LTI 1.1 Basic Outcomes
+       service at /imsblis/service/, which answers with an IMS `message_response` envelope.
+
+    No credentialed call was made and no authentication was attempted. Endpoints that require a
+    session are documented by the status they return to an anonymous caller (400/401/403), which
+    is the observed public contract, not an inferred one.
+  version: '1.0.0'
   contact:
     name: Institute for Information Management and Communication (IIMC), Kyoto University
     url: https://www.iimc.kyoto-u.ac.jp/en/inquiry
   x-operator: institution
-  x-operator-evidence: panda.ecs.kyoto-u.ac.jp is under Kyoto University's own registrable domain kyoto-u.ac.jp and is published by the IIMC as the university's Learning Support Service at https://www.iimc.kyoto-u.ac.jp/en/services/education/lms. Sakai is open-source software the university self-deploys, not a hosted vendor tenancy; the host, the tool registry and the LTI platform keys are Kyoto University's.
+  x-operator-evidence: >-
+    panda.ecs.kyoto-u.ac.jp is under Kyoto University's own registrable domain kyoto-u.ac.jp and is
+    published by the IIMC as the university's Learning Support Service at
+    https://www.iimc.kyoto-u.ac.jp/en/services/education/lms. Sakai is open-source software the
+    university self-deploys, not a hosted vendor tenancy; the host, the tool registry and the LTI
+    platform keys are Kyoto University's.
   x-provenance:
     generated: '2026-08-19'
     method: probed
-    source: Written by API Evangelist from live anonymous probes of https://panda.ecs.kyoto-u.ac.jp on 2026-08-19. Pristine pre-refine copy. Kyoto University publishes no OpenAPI for this surface.
+    source: >-
+      Written by API Evangelist from live anonymous probes of https://panda.ecs.kyoto-u.ac.jp on 2026-08-19. Pristine pre-refine copy. Kyoto University publishes no OpenAPI for this surface.
     operator: institution
 servers:
 - url: https://panda.ecs.kyoto-u.ac.jp
   description: PandA — Kyoto University Learning Support System (Sakai)
 tags:
 - name: LMS
-  description: PandA learning-management surfaces — the Sakai Entity Broker REST layer and the IMS LTI platform endpoints.
+  description: >-
+    PandA learning-management surfaces — the Sakai Entity Broker REST layer and the IMS LTI
+    platform endpoints.
 paths:
   /direct/describe:
     get:
-      tags:
-      - LMS
+      tags: [LMS]
       operationId: describeEntities
       summary: Self-describing index of every registered entity prefix
-      description: 'Returns the Sakai Entity Broker''s own HTML description of every registered entity prefix and the operations each supports. Verified 2026-08-19: 200, text/html, 53 prefixes registered (announcement, assignment, calendar, content, forum, lessons, lti, poll, sam_core, session, site, syllabus, tool, user, wiki and others).'
+      description: >-
+        Returns the Sakai Entity Broker's own HTML description of every registered entity prefix and
+        the operations each supports. Verified 2026-08-19: 200, text/html, 53 prefixes registered
+        (announcement, assignment, calendar, content, forum, lessons, lti, poll, sam_core, session,
+        site, syllabus, tool, user, wiki and others).
       responses:
         '200':
           description: HTML description of all registered entity prefixes.
@@ -36,11 +66,13 @@ paths:
                 type: string
   /direct/tool.json:
     get:
-      tags:
-      - LMS
+      tags: [LMS]
       operationId: listTools
       summary: List every tool registered in the PandA installation
-      description: 'Public, unauthenticated read. Verified 2026-08-19: 200, application/json, 96 registered tools returned with id, title, description, categories, keywords and required functions. This is the one Entity Broker collection that returns substantive data to an anonymous caller.'
+      description: >-
+        Public, unauthenticated read. Verified 2026-08-19: 200, application/json, 96 registered
+        tools returned with id, title, description, categories, keywords and required functions.
+        This is the one Entity Broker collection that returns substantive data to an anonymous caller.
       responses:
         '200':
           description: Tool registry.
@@ -50,11 +82,12 @@ paths:
                 $ref: '#/components/schemas/ToolCollection'
   /direct/site.json:
     get:
-      tags:
-      - LMS
+      tags: [LMS]
       operationId: listSites
       summary: List course and project sites visible to the caller
-      description: 'Verified 2026-08-19: 200, application/json, `site_collection` empty for an anonymous caller. Site membership is session-scoped; no course data is exposed without credentials.'
+      description: >-
+        Verified 2026-08-19: 200, application/json, `site_collection` empty for an anonymous caller.
+        Site membership is session-scoped; no course data is exposed without credentials.
       responses:
         '200':
           description: Site collection, scoped to the caller's session.
@@ -64,8 +97,7 @@ paths:
                 $ref: '#/components/schemas/EntityCollection'
   /direct/syllabus.json:
     get:
-      tags:
-      - LMS
+      tags: [LMS]
       operationId: listSyllabus
       summary: List syllabus entries visible to the caller
       description: 'Verified 2026-08-19: 200, application/json, empty collection for an anonymous caller.'
@@ -78,8 +110,7 @@ paths:
                 $ref: '#/components/schemas/EntityCollection'
   /direct/announcement.json:
     get:
-      tags:
-      - LMS
+      tags: [LMS]
       operationId: listAnnouncements
       summary: List announcements visible to the caller
       description: 'Verified 2026-08-19: 200, application/json, empty collection for an anonymous caller.'
@@ -92,8 +123,7 @@ paths:
                 $ref: '#/components/schemas/EntityCollection'
   /direct/calendar.json:
     get:
-      tags:
-      - LMS
+      tags: [LMS]
       operationId: listCalendarEntries
       summary: List calendar entries visible to the caller
       description: 'Verified 2026-08-19: 200, application/json, empty collection for an anonymous caller.'
@@ -106,8 +136,7 @@ paths:
                 $ref: '#/components/schemas/EntityCollection'
   /direct/assignment.json:
     get:
-      tags:
-      - LMS
+      tags: [LMS]
       operationId: listAssignments
       summary: List assignments visible to the caller
       description: 'Verified 2026-08-19: 200, application/json, empty collection for an anonymous caller.'
@@ -120,8 +149,7 @@ paths:
                 $ref: '#/components/schemas/EntityCollection'
   /direct/content.json:
     get:
-      tags:
-      - LMS
+      tags: [LMS]
       operationId: listContent
       summary: List content resources visible to the caller
       description: 'Verified 2026-08-19: 200, application/json, empty collection for an anonymous caller.'
@@ -134,11 +162,12 @@ paths:
                 $ref: '#/components/schemas/EntityCollection'
   /direct/lti.json:
     get:
-      tags:
-      - LMS
+      tags: [LMS]
       operationId: listLtiTools
       summary: List LTI tool registrations visible to the caller
-      description: 'Verified 2026-08-19: 200, application/json, empty collection for an anonymous caller. The prefix exists because PandA runs the Sakai LTI (basiclti) service as an LTI platform.'
+      description: >-
+        Verified 2026-08-19: 200, application/json, empty collection for an anonymous caller. The
+        prefix exists because PandA runs the Sakai LTI (basiclti) service as an LTI platform.
       responses:
         '200':
           description: LTI registration collection, scoped to the caller's session.
@@ -148,11 +177,12 @@ paths:
                 $ref: '#/components/schemas/EntityCollection'
   /direct/session.json:
     get:
-      tags:
-      - LMS
+      tags: [LMS]
       operationId: getSession
       summary: Describe the caller's current Sakai session
-      description: 'Verified 2026-08-19: 200, application/json. An anonymous caller receives a session object with creationTime, currentTime and an `active` flag; no user identity is disclosed.'
+      description: >-
+        Verified 2026-08-19: 200, application/json. An anonymous caller receives a session object
+        with creationTime, currentTime and an `active` flag; no user identity is disclosed.
       responses:
         '200':
           description: Session collection for the calling client.
@@ -162,11 +192,12 @@ paths:
                 $ref: '#/components/schemas/EntityCollection'
   /direct/user.json:
     get:
-      tags:
-      - LMS
+      tags: [LMS]
       operationId: listUsers
       summary: List users (privileged)
-      description: 'Documented for its access boundary, not for anonymous use. Verified 2026-08-19: an anonymous GET returns 403 Forbidden with a Tomcat error page. The directory is closed.'
+      description: >-
+        Documented for its access boundary, not for anonymous use. Verified 2026-08-19: an
+        anonymous GET returns 403 Forbidden with a Tomcat error page. The directory is closed.
       responses:
         '403':
           description: Forbidden — the caller holds no session with user-directory permission.
@@ -176,11 +207,12 @@ paths:
                 type: string
   /direct/poll.json:
     get:
-      tags:
-      - LMS
+      tags: [LMS]
       operationId: listPolls
       summary: List polls (session required)
-      description: 'Documented for its access boundary. Verified 2026-08-19: an anonymous GET returns 401 Unauthorized.'
+      description: >-
+        Documented for its access boundary. Verified 2026-08-19: an anonymous GET returns 401
+        Unauthorized.
       responses:
         '401':
           description: Unauthorized — an authenticated Sakai session is required.
@@ -190,11 +222,12 @@ paths:
                 type: string
   /direct/membership.json:
     get:
-      tags:
-      - LMS
+      tags: [LMS]
       operationId: listMemberships
       summary: List site memberships (parameters required)
-      description: 'Documented for its access boundary. Verified 2026-08-19: an anonymous GET with no parameters returns 400 Bad Request.'
+      description: >-
+        Documented for its access boundary. Verified 2026-08-19: an anonymous GET with no
+        parameters returns 400 Bad Request.
       responses:
         '400':
           description: Bad Request — required parameters were not supplied.
@@ -204,11 +237,13 @@ paths:
                 type: string
   /imsblis/lti13/keyset:
     get:
-      tags:
-      - LMS
+      tags: [LMS]
       operationId: getLti13Keyset
       summary: LTI 1.3 (LTI Advantage) platform JWKS
-      description: 'Public JSON Web Key Set for PandA acting as an LTI 1.3 platform. Verified 2026-08-19: 200, application/json, three RSA keys, all use=sig alg=RS256, each with a kid. This is the machine-readable evidence that Kyoto University operates an LTI Advantage platform of its own.'
+      description: >-
+        Public JSON Web Key Set for PandA acting as an LTI 1.3 platform. Verified 2026-08-19: 200,
+        application/json, three RSA keys, all use=sig alg=RS256, each with a kid. This is the
+        machine-readable evidence that Kyoto University operates an LTI Advantage platform of its own.
       responses:
         '200':
           description: JSON Web Key Set.
@@ -218,11 +253,15 @@ paths:
                 $ref: '#/components/schemas/Jwks'
   /imsblis/service/:
     get:
-      tags:
-      - LMS
+      tags: [LMS]
       operationId: ltiBasicOutcomesService
       summary: IMS LTI 1.1 Basic Outcomes service endpoint
-      description: 'The LTI 1.1 Basic Outcomes (grade passback) service. Verified 2026-08-19 with a GET and no body: 200 with an IMS `message_response` XML envelope reporting codemajor=Fail, description="Not a valid service request: lti_message_type:null" — i.e. the endpoint is live and speaking IMS LTI. In production use the service is called with POST and an imsx_POXEnvelopeRequest body signed with OAuth 1.0a; that path was NOT exercised here.'
+      description: >-
+        The LTI 1.1 Basic Outcomes (grade passback) service. Verified 2026-08-19 with a GET and no
+        body: 200 with an IMS `message_response` XML envelope reporting
+        codemajor=Fail, description="Not a valid service request: lti_message_type:null" — i.e. the
+        endpoint is live and speaking IMS LTI. In production use the service is called with POST and
+        an imsx_POXEnvelopeRequest body signed with OAuth 1.0a; that path was NOT exercised here.
       responses:
         '200':
           description: IMS POX `message_response` envelope.
@@ -232,38 +271,12 @@ paths:
                 type: string
 components:
   schemas:
-    Jwk:
-      type: object
-      required:
-      - kty
-      - kid
-      - alg
-      - use
-      - n
-      - e
-      properties:
-        kty:
-          type: string
-          example: RSA
-        e:
-          type: string
-          example: AQAB
-        use:
-          type: string
-          example: sig
-        kid:
-          type: string
-        alg:
-          type: string
-          example: RS256
-        n:
-          type: string
-          description: RSA modulus, base64url-encoded.
     EntityCollection:
       type: object
-      description: The generic Sakai Entity Broker envelope. Every /direct/<prefix>.json response carries the prefix and a collection array named "<prefix>_collection".
-      required:
-      - entityPrefix
+      description: >-
+        The generic Sakai Entity Broker envelope. Every /direct/<prefix>.json response carries the
+        prefix and a collection array named "<prefix>_collection".
+      required: [entityPrefix]
       properties:
         entityPrefix:
           type: string
@@ -275,9 +288,7 @@ components:
           type: object
     ToolCollection:
       type: object
-      required:
-      - entityPrefix
-      - tool_collection
+      required: [entityPrefix, tool_collection]
       properties:
         entityPrefix:
           type: string
@@ -289,9 +300,7 @@ components:
     Tool:
       type: object
       description: A tool registered in the PandA (Sakai) installation.
-      required:
-      - id
-      - title
+      required: [id, title]
       properties:
         id:
           type: string
@@ -309,16 +318,14 @@ components:
           type: array
           items:
             type: string
-          example:
-          - sakai.helper
+          example: [sakai.helper]
         keywords:
           type: array
           items:
             type: string
         home:
-          type:
-          - string
-          - 'null'
+          type: string
+          nullable: true
         finalConfig:
           type: object
           additionalProperties: true
@@ -340,10 +347,30 @@ components:
           type: string
     Jwks:
       type: object
-      required:
-      - keys
+      required: [keys]
       properties:
         keys:
           type: array
           items:
             $ref: '#/components/schemas/Jwk'
+    Jwk:
+      type: object
+      required: [kty, kid, alg, use, n, e]
+      properties:
+        kty:
+          type: string
+          example: RSA
+        e:
+          type: string
+          example: AQAB
+        use:
+          type: string
+          example: sig
+        kid:
+          type: string
+        alg:
+          type: string
+          example: RS256
+        n:
+          type: string
+          description: RSA modulus, base64url-encoded.

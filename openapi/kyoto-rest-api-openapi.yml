@@ -1,22 +1,27 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: KURENAI Repository API (DSpace 7.6 + ) OAI-PMH REST API
+  title: KURENAI Repository API (DSpace 7.6 + OAI-PMH) REST API
   description: 'Machine-readable interfaces for the Kyoto University Research Information Repository (KURENAI), a DSpace 7.6 instance. Two confirmed-live surfaces are described: the DSpace REST API (HAL+JSON) rooted at /server/api, and the OAI-PMH 2.0 metadata harvesting endpoint at /server/oai/request. Only paths and shapes verified against the live system are included. Item-level REST endpoints require authentication; the public surfaces (root, communities, collections, OAI-PMH) are anonymous.'
   version: 1.0.0
   contact:
     name: KURENAI Repository Administration
     email: repository@mail2.adm.kyoto-u.ac.jp
+  x-provenance:
+    generated: '2026-08-19'
+    method: probed
+    source: Written by API Evangelist from live probes of the KURENAI repository on 2026-06-03. Pristine pre-refine copy. Kyoto University publishes no OpenAPI for this surface.
+    operator: institution
 servers:
 - url: https://repository.kulib.kyoto-u.ac.jp
   description: Kyoto University Research Information Repository (KURENAI)
 tags:
-- name: REST
+- name: Rest
   description: DSpace 7.6 HAL+JSON REST API
 paths:
   /server/api:
     get:
       tags:
-      - REST
+      - Rest
       operationId: getRoot
       summary: REST API root / HAL entry point
       description: Returns the DSpace REST root document with version and HAL _links to all endpoints.
@@ -30,7 +35,7 @@ paths:
   /server/api/core/communities:
     get:
       tags:
-      - REST
+      - Rest
       operationId: listCommunities
       summary: List top-level and all communities
       parameters:
@@ -46,7 +51,7 @@ paths:
   /server/api/core/communities/{uuid}:
     get:
       tags:
-      - REST
+      - Rest
       operationId: getCommunity
       summary: Retrieve a single community by UUID
       parameters:
@@ -63,7 +68,7 @@ paths:
   /server/api/core/collections:
     get:
       tags:
-      - REST
+      - Rest
       operationId: listCollections
       summary: List collections
       parameters:
@@ -79,38 +84,74 @@ paths:
   /server/api/core/items:
     get:
       tags:
-      - REST
+      - Rest
       operationId: listItems
       summary: List items (authentication required)
       responses:
         '401':
           $ref: '#/components/responses/Error'
 components:
-  parameters:
-    Page:
-      name: page
-      in: query
-      required: false
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
-    Uuid:
-      name: uuid
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    Size:
-      name: size
-      in: query
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        default: 20
   schemas:
+    Community:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        uuid:
+          type: string
+          format: uuid
+        name:
+          type: string
+        handle:
+          type: string
+          example: 2433/36038
+        metadata:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/MetadataValue'
+        archivedItemsCount:
+          type: integer
+        isBulletin:
+          type: boolean
+        type:
+          type: string
+          example: community
+        _links:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              href:
+                type: string
+                format: uri
+    PageMeta:
+      type: object
+      properties:
+        size:
+          type: integer
+        totalElements:
+          type: integer
+        totalPages:
+          type: integer
+        number:
+          type: integer
+    Error:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        status:
+          type: integer
+        error:
+          type: string
+        message:
+          type: string
+        path:
+          type: string
     CollectionPage:
       type: object
       properties:
@@ -145,11 +186,13 @@ components:
         value:
           type: string
         language:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         authority:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         confidence:
           type: integer
         place:
@@ -198,66 +241,6 @@ components:
         type:
           type: string
           example: collection
-    Community:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        uuid:
-          type: string
-          format: uuid
-        name:
-          type: string
-        handle:
-          type: string
-          example: 2433/36038
-        metadata:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              $ref: '#/components/schemas/MetadataValue'
-        archivedItemsCount:
-          type: integer
-        isBulletin:
-          type: boolean
-        type:
-          type: string
-          example: community
-        _links:
-          type: object
-          additionalProperties:
-            type: object
-            properties:
-              href:
-                type: string
-                format: uri
-    Error:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          format: date-time
-        status:
-          type: integer
-        error:
-          type: string
-        message:
-          type: string
-        path:
-          type: string
-    PageMeta:
-      type: object
-      properties:
-        size:
-          type: integer
-        totalElements:
-          type: integer
-        totalPages:
-          type: integer
-        number:
-          type: integer
   responses:
     Error:
       description: Error response
@@ -265,3 +248,27 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    Page:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    Size:
+      name: size
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 20
+    Uuid:
+      name: uuid
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid

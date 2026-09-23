@@ -11,14 +11,40 @@
     "Community": "schema:CollectionPage",
     "Collection": "schema:Collection",
     "Item": "schema:CreativeWork",
-    "handle": { "@id": "dcterms:identifier" },
-    "uuid": { "@id": "schema:identifier" },
-    "title": { "@id": "dcterms:title" },
-    "metadata": { "@id": "schema:additionalProperty" },
-    "archivedItemsCount": { "@id": "schema:size" },
+    "handle": {
+      "@id": "dcterms:identifier"
+    },
+    "uuid": {
+      "@id": "schema:identifier"
+    },
+    "title": {
+      "@id": "dcterms:title"
+    },
+    "metadata": {
+      "@id": "schema:additionalProperty"
+    },
+    "archivedItemsCount": {
+      "@id": "schema:size"
+    },
     "isBulletin": "schema:isPartOf",
     "type": "@type",
-    "_links": { "@id": "schema:url", "@type": "@id" }
+    "_links": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "LearningManagementSystem": "schema:WebApplication",
+    "IdentityProvider": "schema:WebAPI",
+    "Tool": "schema:SoftwareApplication",
+    "entityPrefix": {
+      "@id": "schema:identifier"
+    },
+    "entityId": {
+      "@id": "schema:identifier"
+    },
+    "entityURL": {
+      "@id": "schema:url",
+      "@type": "@id"
+    }
   },
   "@type": "University",
   "name": "Kyoto University",
@@ -27,5 +53,21 @@
     "@type": "Repository",
     "name": "Kyoto University Research Information Repository (KURENAI)",
     "url": "https://repository.kulib.kyoto-u.ac.jp/"
+  },
+  "x-provenance": {
+    "generated": "2026-08-19",
+    "method": "derived",
+    "source": "Derived by API Evangelist from live Kyoto University-operated surfaces (KURENAI DSpace/OAI-PMH, PandA Sakai/LTI, IIMC Shibboleth IdP). Kyoto University publishes no JSON-LD context.",
+    "operator": "institution"
+  },
+  "LearningManagementSystem": {
+    "@type": "LearningManagementSystem",
+    "name": "PandA - Kyoto University Learning Support System",
+    "url": "https://panda.ecs.kyoto-u.ac.jp/portal"
+  },
+  "IdentityProvider": {
+    "@type": "IdentityProvider",
+    "name": "Kyoto University Shibboleth Identity Provider (GakuNin)",
+    "url": "https://authidp1.iimc.kyoto-u.ac.jp/idp/shibboleth"
   }
 }

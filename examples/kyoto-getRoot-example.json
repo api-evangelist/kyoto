@@ -1,13 +1,28 @@
 {
+  "provenance": {
+    "generated": "2026-06-03",
+    "method": "probed",
+    "source": "Live probe of the KURENAI repository (repository.kulib.kyoto-u.ac.jp) during the 2026-06-03 profile; re-verified live 2026-08-19.",
+    "operator": "institution",
+    "notes": "Added 2026-08-19 by the university pipeline: this example previously carried no provenance."
+  },
   "dspaceUI": "https://repository.kulib.kyoto-u.ac.jp",
   "dspaceName": "Kyoto University Research Information Repository",
   "dspaceServer": "https://repository.kulib.kyoto-u.ac.jp/server",
   "dspaceVersion": "DSpace 7.6",
   "type": "root",
   "_links": {
-    "authn": { "href": "https://repository.kulib.kyoto-u.ac.jp/server/api/authn" },
-    "bitstreams": { "href": "https://repository.kulib.kyoto-u.ac.jp/server/api/core/bitstreams" },
-    "communities": { "href": "https://repository.kulib.kyoto-u.ac.jp/server/api/core/communities" },
-    "collections": { "href": "https://repository.kulib.kyoto-u.ac.jp/server/api/core/collections" }
+    "authn": {
+      "href": "https://repository.kulib.kyoto-u.ac.jp/server/api/authn"
+    },
+    "bitstreams": {
+      "href": "https://repository.kulib.kyoto-u.ac.jp/server/api/core/bitstreams"
+    },
+    "communities": {
+      "href": "https://repository.kulib.kyoto-u.ac.jp/server/api/core/communities"
+    },
+    "collections": {
+      "href": "https://repository.kulib.kyoto-u.ac.jp/server/api/core/collections"
+    }
   }
 }

@@ -1,3 +1,11 @@
+generated: '2026-08-19'
+method: derived
+source: >-
+  Derived by API Evangelist from terms observed in live responses of Kyoto University-operated
+  surfaces: the KURENAI DSpace 7.6 REST and OAI-PMH endpoints (2026-06-03, re-verified 2026-08-19)
+  and the PandA (Sakai) Entity Broker plus IMS LTI endpoints (2026-08-19). Kyoto University
+  publishes no vocabulary of its own; nothing here is the institution's own publication.
+operator: institution
 vocabulary:
   name: KURENAI Repository Vocabulary
   description: >-
@@ -54,3 +62,56 @@ vocabulary:
     - term: archivedItemsCount
       definition: The number of archived items contained within a community or collection.
       tags: [dspace, count, metric]
+    - term: PandA
+      definition: >-
+        The Kyoto University Learning Support System, a Sakai deployment operated by the
+        Institute for Information Management and Communication at panda.ecs.kyoto-u.ac.jp.
+      tags: [lms, sakai, education]
+    - term: Entity Broker
+      definition: >-
+        Sakai's REST layer, rooted at /direct, which registers named entity prefixes and
+        self-describes at /direct/describe. Each prefix answers JSON as
+        {"entityPrefix": "<p>", "<p>_collection": [...]}.
+      tags: [lms, sakai, rest]
+    - term: entityPrefix
+      definition: >-
+        The registered Sakai entity name that produced a response (site, tool, syllabus,
+        session, lti and 48 others on this installation).
+      tags: [lms, sakai, rest]
+    - term: functions.require
+      definition: >-
+        Sakai permission string published in a tool's configuration, naming the in-application
+        permission a user needs to run it (for example site.upd). Not an OAuth scope.
+      tags: [lms, sakai, authorization]
+    - term: LTI platform keyset
+      definition: >-
+        The JSON Web Key Set an LTI 1.3 platform publishes so registered tools can verify its
+        signed launches; PandA serves three RS256 keys at /imsblis/lti13/keyset.
+      tags: [lti, security, education]
+    - term: ECS-ID
+      definition: The Kyoto University account issued to students for education and learning services.
+      tags: [identity, account]
+    - term: SPS-ID
+      definition: The Kyoto University account issued to faculty and staff.
+      tags: [identity, account]
+    - term: GakuNin
+      definition: >-
+        The Japanese academic access management federation, operated by the National Institute of
+        Informatics and participating in eduGAIN. Kyoto University's Shibboleth IdP and its
+        supercomputer service provider are both registered members.
+      tags: [identity, federation, saml]
+    - term: shibmd:Scope
+      definition: >-
+        The Shibboleth metadata extension asserting the domain an identity provider is authoritative
+        for; Kyoto University's IdP declares kyoto-u.ac.jp.
+      tags: [identity, shibboleth, saml]
+    - term: jpcoar
+      definition: >-
+        The Japan Consortium for Open Access Repositories metadata schema; KURENAI serves
+        jpcoar_2.0 and jpcoar_1.0 over OAI-PMH alongside junii2 for NII IRDB harvesting.
+      tags: [oai-pmh, metadata, japan]
+    - term: JaLC
+      definition: >-
+        The Japan Link Center, the DOI registration agency through which KURENAI's 10.14989 DOIs are
+        registered - which is why no DataCite or Crossref conformance is claimed for Kyoto.
+      tags: [doi, identifiers, japan]

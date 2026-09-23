@@ -1,0 +1,97 @@
+generated: '2026-08-19'
+method: probed
+source: >-
+  Version and lifecycle facts read directly from live responses on 2026-08-19; where a version is
+  reported by the software itself the reporting endpoint is named.
+provider: Kyoto University
+providerId: kyoto
+description: >-
+  Lifecycle posture of the machine-readable surfaces Kyoto University operates. The university
+  publishes no changelog, no deprecation policy, no status page and no versioning statement for any
+  of them; what can be established is the version each system reports about itself and the protocol
+  version each interface speaks.
+versioning:
+  published_policy: none_found
+  scheme: none_declared
+  detail: >-
+    No surface carries a version in its path or in a header, and no versioning or deprecation policy
+    was found on any Kyoto University host. Consumers are on protocol versions and product releases,
+    not on a contract the university has committed to.
+surfaces:
+- name: KURENAI Research Information Repository
+  operator: institution
+  software: DSpace 7.6
+  software_evidence:
+    url: https://repository.kulib.kyoto-u.ac.jp/server/api
+    status: 200
+    detail: 'REST root reports dspaceVersion "DSpace 7.6".'
+  protocols:
+  - name: OAI-PMH
+    version: '2.0'
+    evidence: https://repository.kulib.kyoto-u.ac.jp/server/oai/request?verb=Identify
+  - name: DSpace REST (HAL+JSON)
+    version: '7'
+    evidence: https://repository.kulib.kyoto-u.ac.jp/server/api
+  earliest_content: '2006-06-05T02:18:13Z'
+  earliest_content_evidence: earliestDatestamp in the OAI-PMH Identify response - twenty years of continuous operation.
+  deleted_record_policy: transient
+  deleted_record_evidence: deletedRecord="transient" in the OAI-PMH Identify response.
+  metadata_formats: 15
+  notes: >-
+    deletedRecord="transient" is a real lifecycle statement and the only one Kyoto publishes in a
+    machine-readable form: harvesters are told the repository does not guarantee persistent tombstones
+    for withdrawn records.
+- name: PandA Learning Support System
+  operator: institution
+  software: Sakai
+  software_evidence:
+    url: https://panda.ecs.kyoto-u.ac.jp/direct/describe
+    status: 200
+    detail: >-
+      Sakai Entity Broker self-description listing 53 registered entity prefixes. The installation
+      does not report a Sakai release number on any anonymous endpoint, so no version is claimed here.
+  protocols:
+  - name: IMS LTI
+    version: '1.3'
+    evidence: https://panda.ecs.kyoto-u.ac.jp/imsblis/lti13/keyset
+    detail: LTI Advantage platform JWKS, three RS256 keys.
+  - name: IMS LTI
+    version: '1.1'
+    evidence: https://panda.ecs.kyoto-u.ac.jp/imsblis/service/
+    detail: Basic Outcomes service answering with an IMS POX message_response envelope.
+  notes: >-
+    Both LTI generations are live simultaneously, which is the normal transitional posture for a
+    Sakai platform and means integrators can still be running the 1.1 grade-passback path.
+- name: Kyoto University Shibboleth Identity Provider
+  operator: institution
+  protocols:
+  - name: SAML
+    version: '2.0'
+    evidence: https://authidp1.iimc.kyoto-u.ac.jp/idp/shibboleth
+  - name: SAML
+    version: '1.1'
+    evidence: https://authidp1.iimc.kyoto-u.ac.jp/idp/shibboleth
+    detail: >-
+      protocolSupportEnumeration also advertises urn:oasis:names:tc:SAML:1.1:protocol and
+      urn:mace:shibboleth:1.0 - the legacy Shibboleth 1.x profile is still enabled alongside SAML 2.0.
+  federation: GakuNin (National Institute of Informatics), eduGAIN participant
+  notes: >-
+    Federation metadata carries its own expiry and re-signing cadence, which is the one genuine
+    lifecycle discipline in this profile - but it is GakuNin's discipline applied to Kyoto's entity,
+    not a policy Kyoto publishes.
+retired_or_absent:
+- name: Kyoto University Educational and Research Activities Database (old host)
+  url: https://kyouindb.iimc.kyoto-u.ac.jp/e/
+  status: 200
+  detail: >-
+    Serves only a notice: the database was renewed in 2022 and moved to kdb.iimc.kyoto-u.ac.jp, and
+    the automatic redirect was switched off in March 2024. A live host serving a farewell notice, not
+    a surface. The current database at https://kdb.iimc.kyoto-u.ac.jp/ is live (HTTP 200) and publishes
+    no API.
+- name: Repository RSS feed
+  url: https://repository.kulib.kyoto-u.ac.jp/feed/rss_2.0/site
+  status: 200
+  detail: Soft-404 - returns the Angular shell. No feed exists despite the 200.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

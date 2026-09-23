@@ -1,10 +1,14 @@
+generated: '2026-08-19'
+method: derived
+source: >-
+  Derived by API Evangelist from this repository's apis.yml and the live surfaces probed 2026-08-19. Kyoto University publishes no FinOps or cost artifact.
 specification: FinOps Framework
 specificationVersion: '1.0'
 schema: https://www.finops.org/framework/
 provider: Kyoto University
 providerId: kyoto
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-19'
 reconciled: false
 tags:
 - Education

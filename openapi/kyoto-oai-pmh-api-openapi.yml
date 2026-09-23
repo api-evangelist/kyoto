@@ -1,22 +1,27 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: KURENAI Repository API (DSpace 7.6 REST + ) OAI-PMH API
+  title: KURENAI Repository API (DSpace 7.6 REST + ) OAI PMH API
   description: 'Machine-readable interfaces for the Kyoto University Research Information Repository (KURENAI), a DSpace 7.6 instance. Two confirmed-live surfaces are described: the DSpace REST API (HAL+JSON) rooted at /server/api, and the OAI-PMH 2.0 metadata harvesting endpoint at /server/oai/request. Only paths and shapes verified against the live system are included. Item-level REST endpoints require authentication; the public surfaces (root, communities, collections, OAI-PMH) are anonymous.'
   version: 1.0.0
   contact:
     name: KURENAI Repository Administration
     email: repository@mail2.adm.kyoto-u.ac.jp
+  x-provenance:
+    generated: '2026-08-19'
+    method: probed
+    source: Written by API Evangelist from live probes of the KURENAI repository on 2026-06-03. Pristine pre-refine copy. Kyoto University publishes no OpenAPI for this surface.
+    operator: institution
 servers:
 - url: https://repository.kulib.kyoto-u.ac.jp
   description: Kyoto University Research Information Repository (KURENAI)
 tags:
-- name: OAI-PMH
+- name: oai pmh
   description: OAI-PMH 2.0 metadata harvesting interface
 paths:
   /server/oai/request:
     get:
       tags:
-      - OAI-PMH
+      - oai pmh
       operationId: oaiRequest
       summary: OAI-PMH 2.0 request endpoint
       description: Single OAI-PMH 2.0 endpoint. The verb parameter selects the operation. Responses are OAI-PMH XML. Supported metadata prefixes include oai_dc, jpcoar_2.0, and didl.

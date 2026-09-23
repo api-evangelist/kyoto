@@ -1,0 +1,161 @@
+generated: '2026-08-19'
+method: probed
+source: >-
+  Live probes of Kyoto University-operated hosts on 2026-08-19, run as part of the API Evangelist
+  university pipeline. Every entry below points at the exact URL that returned the evidence. No
+  conformance is recorded from a prose claim, and no credential was used on any probe.
+provider: Kyoto University
+providerId: kyoto
+regime: education
+description: >-
+  Conformance of Kyoto University's own machine-readable surfaces against the Kin Score `education`
+  regime standards (scim, lti, oneroster, ed-fi, caliper, qti, oai-pmh, shibboleth, saml, orcid,
+  datacite, crossref). Reward-only: an entry under not_found means "no public surface on a
+  Kyoto-operated host produced evidence on 2026-08-19", never "not in use internally".
+standards:
+- id: oai-pmh
+  status: conformant
+  operator: institution
+  evidence:
+    url: https://repository.kulib.kyoto-u.ac.jp/server/oai/request?verb=Identify
+    status: 200
+    content_type: text/xml
+    detail: >-
+      KURENAI, the Kyoto University Research Information Repository, answers OAI-PMH 2.0 Identify on
+      Kyoto University's own host. The response declares repositoryName "Kyoto University Research
+      Information Repository", protocolVersion 2.0, adminEmail repository@mail2.adm.kyoto-u.ac.jp,
+      earliestDatestamp 2006-06-05T02:18:13Z, granularity YYYY-MM-DDThh:mm:ssZ and
+      repositoryIdentifier repository.kulib.kyoto-u.ac.jp. The host sits in 133.3.249.0/24, which
+      JPNIC registers as network KUINS-UJI, organization "Kyoto University" — the repository runs on
+      the university's own network, not a vendor's cloud tenancy.
+  additional_evidence:
+  - url: https://repository.kulib.kyoto-u.ac.jp/server/oai/request?verb=ListMetadataFormats
+    status: 200
+    note: >-
+      15 metadata formats served, including jpcoar_2.0 and jpcoar_1.0 (the Japan Consortium for Open
+      Access Repositories schema), junii2 (NII IRDB harvesting), oai_dc, mods, mets, ore, didl, qdc,
+      etdms, marc and rdf.
+  - url: https://repository.kulib.kyoto-u.ac.jp/server/api
+    status: 200
+    note: 'DSpace REST root reports dspaceVersion "DSpace 7.6", dspaceName "Kyoto University Research Information Repository".'
+- id: shibboleth
+  status: conformant
+  operator: institution
+  evidence:
+    url: https://authidp1.iimc.kyoto-u.ac.jp/idp/shibboleth
+    status: 200
+    content_type: application/xml
+    detail: >-
+      Kyoto University's Shibboleth Identity Provider publishes SAML 2.0 metadata at its canonical
+      /idp/shibboleth location: an <EntityDescriptor> with
+      entityID="https://authidp1.iimc.kyoto-u.ac.jp/idp/shibboleth", an IDPSSODescriptor, and a
+      <shibmd:Scope>kyoto-u.ac.jp</shibmd:Scope> extension — the Shibboleth-specific element that
+      asserts the university's own scope. Operated by the Institute for Information Management and
+      Communication (IIMC); contact authidp@iimc.kyoto-u.ac.jp. A local copy of the document is kept
+      at authentication/kyoto-saml-idp-metadata.xml.
+- id: saml
+  status: conformant
+  operator: institution
+  evidence:
+    url: https://metadata.gakunin.nii.ac.jp/gakunin-metadata.xml
+    status: 200
+    content_type: application/samlmetadata+xml
+    detail: >-
+      Kyoto University is a registered member of GakuNin, the Japanese academic access management
+      federation operated by the National Institute of Informatics and an eduGAIN participant. The
+      federation's aggregate metadata (5.6 MB, fetched 2026-08-19) carries exactly two entities under
+      kyoto-u.ac.jp, both institution-operated:
+      (1) IdP https://authidp1.iimc.kyoto-u.ac.jp/idp/shibboleth — mdui:DisplayName "Kyoto University"
+      / 京都大学, SingleSignOnService bindings for SAML 2.0 HTTP-POST, HTTP-Redirect and the
+      Shibboleth 1.0 AuthnRequest profile;
+      (2) SP https://web.kudpc.kyoto-u.ac.jp/shibboleth-sp — mdui:DisplayName "Supercomputer systems
+      of Academic Center for Computing and Media Studies, Kyoto University", five
+      AssertionConsumerService endpoints, contact consult@kudpc.kyoto-u.ac.jp. Federation membership
+      is an institution-operated fact by definition; no vendor sits between Kyoto University and this
+      metadata.
+- id: lti
+  status: conformant
+  operator: institution
+  evidence:
+    url: https://panda.ecs.kyoto-u.ac.jp/imsblis/lti13/keyset
+    status: 200
+    content_type: application/json
+    detail: >-
+      PandA, the Kyoto University Learning Support System (Sakai) run by the IIMC on the university's
+      own host, publishes a live LTI 1.3 / LTI Advantage platform JWKS containing three RSA keys
+      (kty RSA, use sig, alg RS256, each with a kid). A platform keyset is only served by a system
+      acting as an LTI 1.3 platform, and the keys are Kyoto University's own signing keys.
+  additional_evidence:
+  - url: https://panda.ecs.kyoto-u.ac.jp/imsblis/service/
+    status: 200
+    note: >-
+      LTI 1.1 Basic Outcomes service is live and speaking IMS: an unsigned GET returns an IMS
+      <message_response> envelope with codemajor Fail and description
+      "Not a valid service request: lti_message_type:null".
+  - url: https://panda.ecs.kyoto-u.ac.jp/direct/lti.json
+    status: 200
+    note: 'The Sakai Entity Broker registers an "lti" entity prefix (empty collection for an anonymous caller).'
+  - url: https://www.iimc.kyoto-u.ac.jp/en/services/education/lms
+    status: 200
+    note: The IIMC publishes PandA as the university's own Learning Support Service, establishing institutional operation.
+- id: orcid
+  status: conformant
+  operator: institution
+  evidence:
+    url: https://repository.kulib.kyoto-u.ac.jp/server/oai/request?verb=ListRecords&metadataPrefix=jpcoar_2.0
+    status: 200
+    content_type: text/xml
+    detail: >-
+      KURENAI emits ORCID identifiers in its jpcoar_2.0 records. A single 400 KB ListRecords page
+      fetched 2026-08-19 carried 12 creator/contributor nameIdentifiers with
+      nameIdentifierScheme="ORCID", alongside 10 ROR identifiers, 14 e-Rad_Researcher and 12 kakenhi
+      identifiers. The identifiers travel in the repository's own metadata on the university's own
+      host, so the ORCID integration is Kyoto University's.
+  additional_evidence:
+  - url: https://ris-orcid.iimc.kyoto-u.ac.jp/
+    status: 0
+    note: >-
+      The IIMC links an ORCID integration service (ris-orcid.iimc.kyoto-u.ac.jp) from its research
+      services page, but the host does not answer from the public internet (connection failure,
+      2026-08-19) — campus-scoped, so it is recorded as evidence of the program, not as a public surface.
+not_found:
+- id: scim
+  detail: >-
+    No public SCIM 2.0 endpoint or SCIM documentation found on a Kyoto University-operated host.
+    Account provisioning (ECS-ID / SPS-ID) is documented only as a human process by the IIMC.
+- id: oneroster
+  detail: No IMS/1EdTech OneRoster endpoint found on a Kyoto University-operated host.
+- id: ed-fi
+  detail: Ed-Fi is a US K-12 data standard; no Kyoto University surface implements it.
+- id: caliper
+  detail: >-
+    No Caliper Analytics event store or endpoint found. PandA's Sakai build registers no caliper
+    entity prefix among the 53 listed at /direct/describe.
+- id: qti
+  detail: >-
+    Not confirmed. PandA registers the Samigo assessment entity prefixes (sam_core, sam_item,
+    sam_pub, sam_publisheditem) at /direct/describe, and Samigo can import and export QTI, but no
+    anonymous QTI interchange endpoint was reachable and no QTI conformance claim is published.
+    Recorded as not found rather than inferred from the software's capabilities.
+- id: datacite
+  detail: >-
+    KURENAI mints DOIs under the 10.14989 prefix and its jpcoar_2.0 records carry
+    identifierType="DOI" and identifierType="JaLC". Japanese DOIs are registered through the Japan
+    Link Center (JaLC), not DataCite, and no DataCite-conformant API surface operated by Kyoto
+    University was found, so no DataCite conformance is claimed.
+- id: crossref
+  detail: >-
+    Crossref DOIs appear inside KURENAI records as citations to third-party publications
+    (for example 10.1007/s10147-024-02624-x). No Kyoto University-operated Crossref deposit or query
+    surface exists; a DOI in a metadata record is somebody else's registration, not Kyoto's conformance.
+notes: >-
+  Kyoto University's federation and LTI evidence is unusually strong for this cohort and is entirely
+  first-party: the IdP, the LTI 1.3 keyset and the OAI-PMH endpoint all run on hosts under
+  kyoto-u.ac.jp, on Kyoto University's own JPNIC-registered network (KUINS) or in its own AWS
+  account. Nothing in this file rests on a vendor's contract. kyoto-u.figshare.com was checked and
+  rejected: figshare.com answers HTTP 202 with a zero-length body for every subdomain, including a
+  nonsense control (notarealtenant19x7q.figshare.com), so it is a wildcard and not evidence of a
+  Kyoto Figshare tenancy.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

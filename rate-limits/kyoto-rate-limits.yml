@@ -1,10 +1,14 @@
+generated: '2026-08-19'
+method: derived
+source: >-
+  Derived by API Evangelist from this repository's apis.yml and the live surfaces probed 2026-08-19. Kyoto University publishes no rate-limit table, no 429 documentation and no Retry-After policy for any surface.
 specification: API Commons Rate Limits
 specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
 provider: Kyoto University
 providerId: kyoto
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-19'
 reconciled: false
 tags:
 - Education
@@ -12,10 +16,12 @@ tags:
 - University
 - Rate Limiting
 description: >-
-  Kyoto University does not publish a unified public rate-limit table across its APIs. Open
-  metadata and harvesting endpoints (OAI-PMH, IIIF, library) may throttle large-scale
-  or automated harvesting; clients should harvest politely, honor Retry-After, and
-  contact the relevant service for bulk access.
+  Kyoto University publishes no rate-limit table, no quota and no throttling policy for any surface
+  it operates, and none of the four institution-operated surfaces returned a rate-limit header when
+  probed on 2026-08-19. The KURENAI OAI-PMH endpoint is the one that most plausibly throttles a
+  large harvest; the PandA Entity Broker, the LTI keyset and the Shibboleth metadata endpoint are
+  small, cheap reads. Clients should harvest politely, honor Retry-After if it ever appears, and
+  contact repository@mail2.adm.kyoto-u.ac.jp for bulk access. Nothing here is a published limit.
 notes: Confirm per-service limits with each API's documentation; harvest responsibly.
 sources:
 - https://raw.githubusercontent.com/api-evangelist/kyoto/refs/heads/main/apis.yml

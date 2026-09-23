@@ -1,16 +1,26 @@
 {
   "provider": "kyoto",
   "sources": [
-    "kyoto-oai-pmh-api-openapi.yml",
-    "kyoto-rest-api-openapi.yml"
+    "_original/kyoto-kurenai-oai.yaml",
+    "_original/kyoto-panda-lms.yaml"
   ],
   "outputs": [
     "kyoto-oai-pmh-api-openapi.yml",
-    "kyoto-rest-api-openapi.yml"
+    "kyoto-rest-api-openapi.yml",
+    "kyoto-lms-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "kyoto-kurenai-oai.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "kyoto-panda-lms.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "kyoto-lms-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kyoto-oai-pmh-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kyoto-rest-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -1,3 +1,10 @@
+# provenance:
+#   generated: 2026-08-19
+#   method: derived
+#   source: Derived by API Evangelist from the OpenAPI definitions in this repository.
+#           Kyoto University publishes no governance ruleset; this is not the institution's own artifact.
+#   operator: institution (subject), API Evangelist (author)
+x-method: derived
 extends: [[spectral:oas, off]]
 formats:
   - oas3
@@ -10,14 +17,14 @@ rules:
     then:
       field: contact
       function: truthy
-  kyoto-server-is-kurenai:
-    description: Servers must point at the KURENAI repository host.
+  kyoto-server-is-institution-operated:
+    description: Servers must point at a host under the Kyoto University registrable domain (kyoto-u.ac.jp).
     given: $.servers[*].url
     severity: error
     then:
       function: pattern
       functionOptions:
-        match: "^https://repository\\.kulib\\.kyoto-u\\.ac\\.jp"
+        match: "^https://[a-z0-9.-]+\\.kyoto-u\\.ac\\.jp"
   kyoto-operation-ids:
     description: Every operation should carry an operationId.
     given: $.paths[*][get,post,put,delete,patch]

@@ -1,10 +1,14 @@
+generated: '2026-08-19'
+method: derived
+source: >-
+  Derived by API Evangelist from this repository's apis.yml and the live surfaces probed 2026-08-19. Kyoto University publishes no plans, pricing or commercial terms for any API.
 specification: API Commons Plans
 specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
 provider: Kyoto University
 providerId: kyoto
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-19'
 reconciled: false
 tags:
 - Education

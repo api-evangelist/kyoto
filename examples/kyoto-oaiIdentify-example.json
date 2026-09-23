@@ -1,4 +1,11 @@
 {
+  "provenance": {
+    "generated": "2026-06-03",
+    "method": "probed",
+    "source": "Live probe of the KURENAI repository (repository.kulib.kyoto-u.ac.jp) during the 2026-06-03 profile; re-verified live 2026-08-19.",
+    "operator": "institution",
+    "notes": "Added 2026-08-19 by the university pipeline: this example previously carried no provenance."
+  },
   "request": {
     "url": "https://repository.kulib.kyoto-u.ac.jp/server/oai/request?verb=Identify"
   },
@@ -11,6 +18,10 @@
     "earliestDatestamp": "2006-06-05T02:18:13Z",
     "deletedRecord": "transient",
     "granularity": "YYYY-MM-DDThh:mm:ssZ",
-    "metadataFormats": ["oai_dc", "jpcoar_2.0", "didl"]
+    "metadataFormats": [
+      "oai_dc",
+      "jpcoar_2.0",
+      "didl"
+    ]
   }
 }
