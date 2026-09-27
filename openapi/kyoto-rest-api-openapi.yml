@@ -92,6 +92,20 @@ paths:
           $ref: '#/components/responses/Error'
 components:
   schemas:
+    CollectionPage:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            collections:
+              type: array
+              items:
+                $ref: '#/components/schemas/Collection'
+        page:
+          $ref: '#/components/schemas/PageMeta'
+        _links:
+          type: object
     Community:
       type: object
       properties:
@@ -127,45 +141,6 @@ components:
               href:
                 type: string
                 format: uri
-    PageMeta:
-      type: object
-      properties:
-        size:
-          type: integer
-        totalElements:
-          type: integer
-        totalPages:
-          type: integer
-        number:
-          type: integer
-    Error:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          format: date-time
-        status:
-          type: integer
-        error:
-          type: string
-        message:
-          type: string
-        path:
-          type: string
-    CollectionPage:
-      type: object
-      properties:
-        _embedded:
-          type: object
-          properties:
-            collections:
-              type: array
-              items:
-                $ref: '#/components/schemas/Collection'
-        page:
-          $ref: '#/components/schemas/PageMeta'
-        _links:
-          type: object
     CommunityPage:
       type: object
       properties:
@@ -180,23 +155,6 @@ components:
           $ref: '#/components/schemas/PageMeta'
         _links:
           type: object
-    MetadataValue:
-      type: object
-      properties:
-        value:
-          type: string
-        language:
-          type:
-          - string
-          - 'null'
-        authority:
-          type:
-          - string
-          - 'null'
-        confidence:
-          type: integer
-        place:
-          type: integer
     RestRoot:
       type: object
       properties:
@@ -222,6 +180,20 @@ components:
               href:
                 type: string
                 format: uri
+    Error:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        status:
+          type: integer
+        error:
+          type: string
+        message:
+          type: string
+        path:
+          type: string
     Collection:
       type: object
       properties:
@@ -241,6 +213,34 @@ components:
         type:
           type: string
           example: collection
+    PageMeta:
+      type: object
+      properties:
+        size:
+          type: integer
+        totalElements:
+          type: integer
+        totalPages:
+          type: integer
+        number:
+          type: integer
+    MetadataValue:
+      type: object
+      properties:
+        value:
+          type: string
+        language:
+          type:
+          - string
+          - 'null'
+        authority:
+          type:
+          - string
+          - 'null'
+        confidence:
+          type: integer
+        place:
+          type: integer
   responses:
     Error:
       description: Error response
@@ -249,14 +249,6 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   parameters:
-    Page:
-      name: page
-      in: query
-      required: false
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
     Size:
       name: size
       in: query
@@ -265,6 +257,14 @@ components:
         type: integer
         minimum: 1
         default: 20
+    Page:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
     Uuid:
       name: uuid
       in: path
