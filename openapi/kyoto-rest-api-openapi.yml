@@ -91,21 +91,45 @@ paths:
         '401':
           $ref: '#/components/responses/Error'
 components:
+  parameters:
+    Uuid:
+      name: uuid
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    Size:
+      name: size
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 20
+    Page:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
   schemas:
-    CollectionPage:
+    Error:
       type: object
       properties:
-        _embedded:
-          type: object
-          properties:
-            collections:
-              type: array
-              items:
-                $ref: '#/components/schemas/Collection'
-        page:
-          $ref: '#/components/schemas/PageMeta'
-        _links:
-          type: object
+        timestamp:
+          type: string
+          format: date-time
+        status:
+          type: integer
+        error:
+          type: string
+        message:
+          type: string
+        path:
+          type: string
     Community:
       type: object
       properties:
@@ -141,16 +165,16 @@ components:
               href:
                 type: string
                 format: uri
-    CommunityPage:
+    CollectionPage:
       type: object
       properties:
         _embedded:
           type: object
           properties:
-            communities:
+            collections:
               type: array
               items:
-                $ref: '#/components/schemas/Community'
+                $ref: '#/components/schemas/Collection'
         page:
           $ref: '#/components/schemas/PageMeta'
         _links:
@@ -180,20 +204,6 @@ components:
               href:
                 type: string
                 format: uri
-    Error:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          format: date-time
-        status:
-          type: integer
-        error:
-          type: string
-        message:
-          type: string
-        path:
-          type: string
     Collection:
       type: object
       properties:
@@ -241,6 +251,20 @@ components:
           type: integer
         place:
           type: integer
+    CommunityPage:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            communities:
+              type: array
+              items:
+                $ref: '#/components/schemas/Community'
+        page:
+          $ref: '#/components/schemas/PageMeta'
+        _links:
+          type: object
   responses:
     Error:
       description: Error response
@@ -248,27 +272,3 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    Size:
-      name: size
-      in: query
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        default: 20
-    Page:
-      name: page
-      in: query
-      required: false
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
-    Uuid:
-      name: uuid
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid

@@ -232,42 +232,6 @@ paths:
                 type: string
 components:
   schemas:
-    Jwks:
-      type: object
-      required:
-      - keys
-      properties:
-        keys:
-          type: array
-          items:
-            $ref: '#/components/schemas/Jwk'
-    ToolCollection:
-      type: object
-      required:
-      - entityPrefix
-      - tool_collection
-      properties:
-        entityPrefix:
-          type: string
-          example: tool
-        tool_collection:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tool'
-    EntityCollection:
-      type: object
-      description: The generic Sakai Entity Broker envelope. Every /direct/<prefix>.json response carries the prefix and a collection array named "<prefix>_collection".
-      required:
-      - entityPrefix
-      properties:
-        entityPrefix:
-          type: string
-          description: The registered entity prefix that produced this response.
-          example: site
-      additionalProperties:
-        type: array
-        items:
-          type: object
     Jwk:
       type: object
       required:
@@ -295,6 +259,42 @@ components:
         n:
           type: string
           description: RSA modulus, base64url-encoded.
+    ToolCollection:
+      type: object
+      required:
+      - entityPrefix
+      - tool_collection
+      properties:
+        entityPrefix:
+          type: string
+          example: tool
+        tool_collection:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tool'
+    EntityCollection:
+      type: object
+      description: The generic Sakai Entity Broker envelope. Every /direct/<prefix>.json response carries the prefix and a collection array named "<prefix>_collection".
+      required:
+      - entityPrefix
+      properties:
+        entityPrefix:
+          type: string
+          description: The registered entity prefix that produced this response.
+          example: site
+      additionalProperties:
+        type: array
+        items:
+          type: object
+    Jwks:
+      type: object
+      required:
+      - keys
+      properties:
+        keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/Jwk'
     Tool:
       type: object
       description: A tool registered in the PandA (Sakai) installation.
