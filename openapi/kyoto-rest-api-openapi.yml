@@ -91,31 +91,74 @@ paths:
         '401':
           $ref: '#/components/responses/Error'
 components:
-  parameters:
-    Uuid:
-      name: uuid
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    Size:
-      name: size
-      in: query
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        default: 20
-    Page:
-      name: page
-      in: query
-      required: false
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
   schemas:
+    MetadataValue:
+      type: object
+      properties:
+        value:
+          type: string
+        language:
+          type:
+          - string
+          - 'null'
+        authority:
+          type:
+          - string
+          - 'null'
+        confidence:
+          type: integer
+        place:
+          type: integer
+    PageMeta:
+      type: object
+      properties:
+        size:
+          type: integer
+        totalElements:
+          type: integer
+        totalPages:
+          type: integer
+        number:
+          type: integer
+    RestRoot:
+      type: object
+      properties:
+        dspaceUI:
+          type: string
+          format: uri
+        dspaceName:
+          type: string
+        dspaceServer:
+          type: string
+          format: uri
+        dspaceVersion:
+          type: string
+          example: DSpace 7.6
+        type:
+          type: string
+          example: root
+        _links:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              href:
+                type: string
+                format: uri
+    CommunityPage:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            communities:
+              type: array
+              items:
+                $ref: '#/components/schemas/Community'
+        page:
+          $ref: '#/components/schemas/PageMeta'
+        _links:
+          type: object
     Error:
       type: object
       properties:
@@ -130,6 +173,25 @@ components:
           type: string
         path:
           type: string
+    Collection:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        uuid:
+          type: string
+          format: uuid
+        name:
+          type: string
+        handle:
+          type: string
+          example: 2433/126120
+        archivedItemsCount:
+          type: integer
+        type:
+          type: string
+          example: collection
     Community:
       type: object
       properties:
@@ -179,92 +241,30 @@ components:
           $ref: '#/components/schemas/PageMeta'
         _links:
           type: object
-    RestRoot:
-      type: object
-      properties:
-        dspaceUI:
-          type: string
-          format: uri
-        dspaceName:
-          type: string
-        dspaceServer:
-          type: string
-          format: uri
-        dspaceVersion:
-          type: string
-          example: DSpace 7.6
-        type:
-          type: string
-          example: root
-        _links:
-          type: object
-          additionalProperties:
-            type: object
-            properties:
-              href:
-                type: string
-                format: uri
-    Collection:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        uuid:
-          type: string
-          format: uuid
-        name:
-          type: string
-        handle:
-          type: string
-          example: 2433/126120
-        archivedItemsCount:
-          type: integer
-        type:
-          type: string
-          example: collection
-    PageMeta:
-      type: object
-      properties:
-        size:
-          type: integer
-        totalElements:
-          type: integer
-        totalPages:
-          type: integer
-        number:
-          type: integer
-    MetadataValue:
-      type: object
-      properties:
-        value:
-          type: string
-        language:
-          type:
-          - string
-          - 'null'
-        authority:
-          type:
-          - string
-          - 'null'
-        confidence:
-          type: integer
-        place:
-          type: integer
-    CommunityPage:
-      type: object
-      properties:
-        _embedded:
-          type: object
-          properties:
-            communities:
-              type: array
-              items:
-                $ref: '#/components/schemas/Community'
-        page:
-          $ref: '#/components/schemas/PageMeta'
-        _links:
-          type: object
+  parameters:
+    Page:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    Size:
+      name: size
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 20
+    Uuid:
+      name: uuid
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
   responses:
     Error:
       description: Error response
