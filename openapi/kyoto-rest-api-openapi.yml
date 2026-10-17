@@ -91,6 +91,13 @@ paths:
         '401':
           $ref: '#/components/responses/Error'
 components:
+  responses:
+    Error:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     MetadataValue:
       type: object
@@ -120,59 +127,6 @@ components:
           type: integer
         number:
           type: integer
-    RestRoot:
-      type: object
-      properties:
-        dspaceUI:
-          type: string
-          format: uri
-        dspaceName:
-          type: string
-        dspaceServer:
-          type: string
-          format: uri
-        dspaceVersion:
-          type: string
-          example: DSpace 7.6
-        type:
-          type: string
-          example: root
-        _links:
-          type: object
-          additionalProperties:
-            type: object
-            properties:
-              href:
-                type: string
-                format: uri
-    CommunityPage:
-      type: object
-      properties:
-        _embedded:
-          type: object
-          properties:
-            communities:
-              type: array
-              items:
-                $ref: '#/components/schemas/Community'
-        page:
-          $ref: '#/components/schemas/PageMeta'
-        _links:
-          type: object
-    Error:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          format: date-time
-        status:
-          type: integer
-        error:
-          type: string
-        message:
-          type: string
-        path:
-          type: string
     Collection:
       type: object
       properties:
@@ -227,6 +181,34 @@ components:
               href:
                 type: string
                 format: uri
+    Error:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        status:
+          type: integer
+        error:
+          type: string
+        message:
+          type: string
+        path:
+          type: string
+    CommunityPage:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            communities:
+              type: array
+              items:
+                $ref: '#/components/schemas/Community'
+        page:
+          $ref: '#/components/schemas/PageMeta'
+        _links:
+          type: object
     CollectionPage:
       type: object
       properties:
@@ -241,7 +223,39 @@ components:
           $ref: '#/components/schemas/PageMeta'
         _links:
           type: object
+    RestRoot:
+      type: object
+      properties:
+        dspaceUI:
+          type: string
+          format: uri
+        dspaceName:
+          type: string
+        dspaceServer:
+          type: string
+          format: uri
+        dspaceVersion:
+          type: string
+          example: DSpace 7.6
+        type:
+          type: string
+          example: root
+        _links:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              href:
+                type: string
+                format: uri
   parameters:
+    Uuid:
+      name: uuid
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
     Page:
       name: page
       in: query
@@ -258,17 +272,3 @@ components:
         type: integer
         minimum: 1
         default: 20
-    Uuid:
-      name: uuid
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-  responses:
-    Error:
-      description: Error response
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
