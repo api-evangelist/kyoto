@@ -1,4 +1,4 @@
-# Kyoto University (kyoto)
+# Kyoto University
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,75 +64,174 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Kyoto University (京都大学) is a national research university in Kyoto, Japan, established in 1897 and ranked #36 in the QS World University Rankings. This repository catalogs its public, machine-readable footprint as an [APIs.json](https://apisjson.org) profile. The university operates no developer portal, no API gateway and no OpenAPI of its own — but it does run four genuinely first-party machine-readable surfaces on its own hosts: the KURENAI research repository (DSpace 7.6 REST + OAI-PMH 2.0), the PandA Learning Support System (Sakai Entity Broker + IMS LTI 1.3 and 1.1), and its own Shibboleth SAML 2.0 identity provider registered in the GakuNin federation.
+Kyoto University (京都大学) is a national research university in Kyoto, Japan, established in 1897 and ranked #36 in the QS World University Rankings. It operates no developer portal, no API gateway, no API terms of service and no OpenAPI of its own, and this profile records that plainly. What it does run, on its own hosts and its own network, is a small set of genuinely institution-operated machine-readable surfaces: KURENAI, the Kyoto University Research Information Repository, a self-hosted DSpace 7.6 with an anonymous HAL+JSON REST API and an OAI-PMH 2.0 endpoint serving 15 metadata formats including JPCOAR and junii2, holding content back to 2006; PandA, the university's Sakai Learning Support System, whose Entity Broker answers JSON on 53 registered entity prefixes and which is a live IMS LTI 1.3 platform publishing its own signing keyset alongside a working LTI 1.1 outcomes service; and its own Shibboleth SAML 2.0 identity provider, registered in GakuNin, the Japanese academic federation, which participates in eduGAIN. Those surfaces sit on hosts inside 133.3.0.0/16, registered by JPNIC to Kyoto University as KUINS, or in the university's own AWS account. Five of the twelve Kin Score education-regime standards are met with live evidence — oai-pmh, shibboleth, saml, lti and orcid — which is unusual for this cohort and entirely first-party. Everything else is a human-facing service: the KULINE library catalogue, the KDB researcher database, OpenCourseWare, and the generative-AI tooling the IIMC brokers from Google and Microsoft. Student information, course registration and timetable systems are behind campus accounts and are not public APIs.
 
-- APIs.json: https://raw.githubusercontent.com/api-evangelist/kyoto/refs/heads/main/apis.yml
-- Run it with Naftiko: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=kyoto-api-evangelist&utm_content=repo
+**Areas:** University · Higher Education · Education · Japan · National University · Research Repository · Research Data · Identity Federation · LMS · Open Access · Research Computing · Scholarly
 
-## Type
+## Kyoto University on APIs.io
 
-- university (Public Research University)
-- Index
-- Consumer
-- 3rd-Party
+Everything profiled for Kyoto University is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/kyoto/](https://apis.io/providers/kyoto/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (4)
 
-University, Higher Education, Education, Japan, National University, Research Repository, Research Data, Identity Federation, Learning Management, Open Access, Research Computing, Scholarly
+- [KURENAI OAI-PMH API](https://apis.io/apis/kyoto/kyoto-oai-pmh-api/) — OAI-PMH 2.0 metadata harvesting interface for KURENAI, the Kyoto University Research Information Repository. Anonymous, verb-driven, and serving 15 metadata…
+- [KURENAI DSpace REST API](https://apis.io/apis/kyoto/kyoto-rest-api/) — The DSpace 7.6 HAL+JSON REST API of the Kyoto University Research Information Repository. The root document at /server/api advertises every endpoint as HAL…
+- [PandA Learning Support System API (Sakai Entity Broker + IMS LTI)](https://apis.io/apis/kyoto/kyoto-lms-api/) — PandA is the Kyoto University Learning Support System, a Sakai deployment operated by the Institute for Information Management and Communication and…
+- [Kyoto University Shibboleth Identity Provider (GakuNin)](https://apis.io/apis/kyoto/sso/) — Kyoto University operates its own Shibboleth SAML 2.0 identity provider, run by the Institute for Information Management and Communication, with public…
 
-## APIs
+### Published properties
 
-Every surface below is `x-operator: institution` — Kyoto University's own host, own network, own engineering. No vendor contract is credited to this institution.
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- **KURENAI OAI-PMH API** — OAI-PMH 2.0 harvesting for the Kyoto University Research Information Repository; 15 metadata formats including jpcoar_2.0 and junii2, content back to 2006-06-05. Docs: https://repository.kulib.kyoto-u.ac.jp/ — Base: `https://repository.kulib.kyoto-u.ac.jp/server/oai/request`
-- **KURENAI DSpace REST API** — DSpace 7.6 HAL+JSON, anonymous reads on the root, communities and collections. Base: `https://repository.kulib.kyoto-u.ac.jp/server/api`
-- **PandA Learning Support System API (Sakai Entity Broker + IMS LTI)** — 53 registered entity prefixes, a fully public 96-entry tool registry, an LTI 1.3 platform JWKS and a live LTI 1.1 Basic Outcomes service. Docs: https://www.iimc.kyoto-u.ac.jp/en/services/education/lms — Base: `https://panda.ecs.kyoto-u.ac.jp`
-- **Kyoto University Shibboleth Identity Provider (GakuNin)** — public SAML 2.0 metadata, scope `kyoto-u.ac.jp`, registered in GakuNin (NII) and thereby eduGAIN. Base: `https://authidp1.iimc.kyoto-u.ac.jp/idp/shibboleth`
+#### Agentic access (1)
 
-## Education-regime conformance
+Which operations an agent can call, which act, and which need a human in the loop.
 
-Five of the twelve Kin Score `education` regime standards are met with live evidence, all first-party: **oai-pmh**, **shibboleth**, **saml**, **lti** (1.3 + 1.1) and **orcid**. Not found: scim, oneroster, ed-fi, caliper, qti, datacite, crossref. See [conformance/kyoto-education-standards-conformance.yml](conformance/kyoto-education-standards-conformance.yml).
+- [Kyoto Agentic Access](https://apis.io/agentic-access/kyoto/kyoto-agentic-access/)
 
-## Artifacts
+#### JSON Schema (4)
 
-- [conformance/kyoto-education-standards-conformance.yml](conformance/kyoto-education-standards-conformance.yml)
-- [authentication/kyoto-authentication.yml](authentication/kyoto-authentication.yml) · [authentication/kyoto-saml-idp-metadata.xml](authentication/kyoto-saml-idp-metadata.xml)
-- [errors/kyoto-errors.yml](errors/kyoto-errors.yml)
-- [scopes/kyoto-scopes.yml](scopes/kyoto-scopes.yml)
-- [lifecycle/kyoto-lifecycle.yml](lifecycle/kyoto-lifecycle.yml)
-- [plans/kyoto-plans-pricing.yml](plans/kyoto-plans-pricing.yml)
-- [rate-limits/kyoto-rate-limits.yml](rate-limits/kyoto-rate-limits.yml)
-- [finops/kyoto-finops.yml](finops/kyoto-finops.yml)
+The data models the API reads and writes.
 
-## Timestamps
+- [KURENAI Collection](https://apis.io/schemas/kyoto/kyoto-collection/)
+- [KURENAI Community](https://apis.io/schemas/kyoto/kyoto-community/)
+- [PandA Entity Broker Collection](https://apis.io/schemas/kyoto/kyoto-panda-entity-collection/)
+- [PandA Tool](https://apis.io/schemas/kyoto/kyoto-panda-tool/)
 
-- Created: 2026-06-03
-- Modified: 2026-08-19
+#### JSON Structure (2)
 
-## Common Properties
+Data models expressed in JSON Structure.
 
-- Website: https://www.kyoto-u.ac.jp/en
-- Research repository: https://repository.kulib.kyoto-u.ac.jp/
-- Identity federation: https://authidp1.iimc.kyoto-u.ac.jp/idp/shibboleth
-- Learning (PandA): https://www.iimc.kyoto-u.ac.jp/en/services/education/lms
-- Research computing: https://www.iimc.kyoto-u.ac.jp/en/services/comp
-- Library catalog (KULINE): https://kuline.kulib.kyoto-u.ac.jp/opac/opac_search/
-- Researcher database (KDB): https://kdb.iimc.kyoto-u.ac.jp/
-- AI tooling: https://www.iimc.kyoto-u.ac.jp/en/services/gen-ai
-- GitHub: https://github.com/kyoto-u
-- LinkedIn: https://www.linkedin.com/school/kyoto-university/
-- X: https://x.com/KyotoU_News
+- [Kyoto Collection Structure](https://apis.io/json-structure/kyoto/kyoto-collection-structure/)
+- [Kyoto Community Structure](https://apis.io/json-structure/kyoto/kyoto-community-structure/)
 
-## Notes
+#### JSON-LD (1)
 
-Re-profiled 2026-08-19 under the API Evangelist university pipeline, which settles **who operates each surface** before saving any contract. Every endpoint here was probed live on that date with no credentials.
+Linked-data contexts for the provider's vocabulary.
 
-Two surfaces were newly discovered and had been entirely absent from the June 2026 profile: the **PandA (Sakai) LMS**, which is a live IMS LTI 1.3 platform, and the **Shibboleth/GakuNin SAML metadata** endpoint. One recorded fact was wrong and was corrected: the DSpace REST API's base URL pointed at the OAI-PMH path.
+- [Kyoto Context](https://apis.io/jsonld/kyoto/kyoto-context/)
 
-Several things that look like surfaces are not, and are recorded as such rather than credited: `repository.kulib.kyoto-u.ac.jp` returns HTTP 200 with an Angular shell for paths that do not exist, so its `/.well-known/security.txt` and `/feed/rss_2.0/site` are **soft-404s**, not a security contact and not a feed. `kyoto-u.figshare.com` is **wildcard DNS**, not a Figshare tenancy — a nonsense control subdomain returns the identical HTTP 202 with a zero-length body. The IIMC ORCID service and the university's Generative AI portal are **gated**, not absent. The old researcher database host serves only a notice that it moved in 2022. The dead `@Kyoto_Univ_PR` handle was removed; the official account is `@KyotoU_News`. The LinkedIn page returns HTTP 999 from LinkedIn's bot challenge — blocked, not dead.
+#### Vocabulary (1)
 
-Student information, course registration and timetable systems are behind campus accounts and are not public APIs. None are invented here.
+The provider's domain terms, defined.
 
-## Maintainers
+- [KURENAI Repository Vocabulary](https://apis.io/vocabularies/kyoto/kyoto-vocabulary/)
 
-- Kin Lane — kin@apievangelist.com
+#### Examples (6)
+
+Example requests and responses.
+
+- [Kyoto Getroot Example](https://apis.io/examples/kyoto/kyoto-getRoot-example/)
+- [Kyoto Listcommunities Example](https://apis.io/examples/kyoto/kyoto-listCommunities-example/)
+- [Kyoto Lti13 Keyset Example](https://apis.io/examples/kyoto/kyoto-lti13-keyset-example/)
+- [Kyoto Oaiidentify Example](https://apis.io/examples/kyoto/kyoto-oaiIdentify-example/)
+- [Kyoto Panda Session Example](https://apis.io/examples/kyoto/kyoto-panda-session-example/)
+- [Kyoto Panda Tool Example](https://apis.io/examples/kyoto/kyoto-panda-tool-example/)
+
+#### Collections (2)
+
+Postman and Open Collection request collections.
+
+- [KURENAI Repository API (DSpace 7.6 REST + ) OAI-PMH API](https://apis.io/collections/kyoto/open-kyoto-oai-pmh-api/)
+- [KURENAI Repository API (DSpace 7.6 + ) OAI-PMH REST API](https://apis.io/collections/kyoto/open-kyoto-rest-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Kyoto University — jsonschema rules](https://apis.io/rules/kyoto/kyoto-jsonschema-spectral-rules/)
+- [Kyoto University API Rules](https://apis.io/rules/kyoto/kyoto-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Kyoto Authentication](https://apis.io/security/kyoto/kyoto-authentication/)
+- [Kyoto Domain Security](https://apis.io/security/kyoto/kyoto-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Kyoto Scopes](https://apis.io/scopes/kyoto/kyoto-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Kyoto Plans Pricing](https://apis.io/plans/kyoto/kyoto-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Kyoto Rate Limits](https://apis.io/rate-limits/kyoto/kyoto-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Kyoto Finops](https://apis.io/finops/kyoto/kyoto-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.kyoto-u.ac.jp/en)
+- [Documentation](https://www.iimc.kyoto-u.ac.jp/en/services)
+- [Support](https://www.kyoto-u.ac.jp/en/contact)
+- [Terms of service](https://www.kyoto-u.ac.jp/en/site-policy)
+- [Privacy policy](https://www.kyoto-u.ac.jp/en/privacy-policy)
+
+## API Evangelist rating
+
+**Kin Score 37.4** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 58.0 |
+| Contract governance | 17.4 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 26.2 |
+| Access clarity | 26.3 |
+
+**Agent readiness 22.2** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | — |
+| OpenAPI Examples | documented (partial credit) |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 34.3** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/kyoto/](https://apis.io/providers/kyoto/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Kyoto University: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/kyoto/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
